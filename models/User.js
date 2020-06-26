@@ -11,7 +11,8 @@ const User = new Schema({
   loanedEmail: String,
   loanedPhone: String
  }]
+})
 
-)}
+User.plugin(require('passport-local-mongoose'))
 
 module.exports = model('User', User)
