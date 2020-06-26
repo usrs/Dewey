@@ -4,4 +4,4 @@ const Dewey = new Schema({
  pass properties 
 )}
 
-module.exports = ('Dewey', Dewey)
+module.exports = model ('Dewey', Dewey)
