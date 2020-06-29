@@ -8,7 +8,7 @@ const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt')
 const app = express()
 const { User } = require('./models')
 
-app.use(express.static(join(__dirname, 'client', 'build')))
+app.use(express.static(join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
@@ -29,6 +29,10 @@ passport.use(new JWTStrategy({
 
 app.use(require('./routes'))
 
+app.get('*', (req, res) => {
+ res.sendFile(join(__dirname, 'public'))
+})
+
 require('mongoose').connect(process.env.MONGODB_URI || process.env.LOCAL_URI, {
     useNewUrlParser: true,
  useUnifiedTopology: true
@@ -36,6 +40,3 @@ require('mongoose').connect(process.env.MONGODB_URI || process.env.LOCAL_URI, {
  .then(() => app.listen(process.env.PORT || 3001))
  .catch(err => console.error(err))
 
-app.get('*', (req, res) => {
- res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
-})
