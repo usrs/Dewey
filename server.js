@@ -1,11 +1,11 @@
-require('dotenv').config
+require('dotenv').config()
 const express = require('express')
-Const { join } = require('path')
+const { join } = require('path')
 const passport = require('passport')
 const { Strategy } = require('passport-local')
 const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt')
 
-Const app = express()
+const app = express()
 const { User } = require('./models')
 
 app.use(express.static(join(__dirname, 'client', 'build')))
@@ -29,7 +29,7 @@ passport.use(new JWTStrategy({
 
 app.use(require('./routes'))
 
-require('mongoose').connect('process.env.MONGODB_URI || process.env.LOCAL_URI, {
+require('mongoose').connect(process.env.MONGODB_URI || process.env.LOCAL_URI, {
     useNewUrlParser: true,
  useUnifiedTopology: true
 })
@@ -37,5 +37,5 @@ require('mongoose').connect('process.env.MONGODB_URI || process.env.LOCAL_URI, {
  .catch(err => console.error(err))
 
 app.get('*', (req, res) => {
- res.sendFile(join(_dirname, 'client', 'build', 'index.html'))
+ res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
 })
