@@ -3,7 +3,7 @@ const axios = require('axios')
 const { Book } = require('../models')
 
 router.get('/books/:search', (req, res) => {
-  axios.get(`https://api2.isbndb.com/book/${req.params.search}?Authorization=${process.env.API_KEY}`)
+  axios.get(`https://openlibrary.org/api/books?bibkeys=ISBN:${req.params.search}&jscmd=details&format=json`)
   .then(({ data }) => {
     console.log(data)
   })
