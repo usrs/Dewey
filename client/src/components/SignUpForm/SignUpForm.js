@@ -43,7 +43,7 @@ const SignUpForm = () => {
                         label="signInBtn"
                         color="primary"
                         href="#outlined-buttons">
-                        Sign-In
+                        Sign-Up
       </Button>
                 </Grid>
                 <Grid item xs={12}>
