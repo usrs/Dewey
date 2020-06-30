@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
+ "scripts": {
+  "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+  "start:prod": "node server.js",
+  "start:dev": "concurrently \"nodemon --ignore 'client/*' \" \"npm run client\"",
+  "client": "cd client && npm run start",
+  "install": "cd client && npm install",
+  "build": "cd client && npm run build",
+  "heroku-postbuild": "npm run build"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/usrs/Dewey.git"
@@ -20,8 +25,10 @@
   "homepage": "https://github.com/usrs/Dewey#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "concurrently": "^5.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.20",
     "passport": "^0.4.1",
