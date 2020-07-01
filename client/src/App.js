@@ -6,16 +6,29 @@ import {
 } from 'react-router-dom'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
+import axios from 'axios'
+import SignUpContext from './utils/SignUpContext'
 
 const App = () => {
 
-  const [userState, setUserState] = useState({
-
+  const [signUpState, setSignUpState] = useState({
+    name: '',
+    email: '',
+    username: '',
+    password: ''
   })
 
-  userState.handleInputChange = event => {
-    setUserState({ ...userState, [event.target.name]: event.target.value })
-    console.log(userState)
+  signUpState.handleInputSignUpChange = event => {
+    setSignUpState({ ...signUpState, [event.target.name]: event.target.value })
+  }
+
+  signUpState.handleSignUpSubmit = event => {
+    event.preventDefault()
+    axios.post('/users/register', signUpState)
+      .then(({ data }) => {
+        console.log(data)
+      })
+      .catch(err => console.error(err))
   }
 
   return(
@@ -23,7 +36,9 @@ const App = () => {
       <div>
         <Switch>
           <Route exact path='/'>
-            <SignUp />
+            <SignUpContext.Provider value={signUpState}>
+              <SignUp />
+            </SignUpContext.Provider>
           </Route>
           <Route path='/Login'>
             <Login />

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import UserContext from '../../utils/UserContext'
+import SignUpContext from '../../utils/SignUpContext'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,7 +26,15 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUpForm = () => {
     const classes = useStyles()
-
+    const {
+        name,
+        email,
+        username,
+        password,
+        handInputSignUpChange,
+        handleSignUpSubmit
+    } = useContext(signUpContext)
+    
     return (
         <div>
             <h1>Sign Up Here</h1>
@@ -35,17 +43,37 @@ const SignUpForm = () => {
                     <TextField
                         required
                         id="outlined-required"
+                        label="name"
+                        name="name"
+                        defaultValue="name"
+                        variant="outlined"
+                        value={name}
+                        onChange={handleInputSignUpChange}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        required
+                        id="outlined-required"
+                        label="email"
+                        name="email"
+                        defaultValue="email"
+                        variant="outlined"
+                        value={email}
+                        onChange={handleInputSignUpChange}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        required
+                        id="outlined-required"
                         label="username"
+                        name="username"
                         defaultValue="username"
                         variant="outlined"
+                        value={username}
+                        onChange={handleInputSignUpChange}
                     />
-                    <Button
-                        variant="outlined"
-                        label="signInBtn"
-                        color="primary"
-                        href="#outlined-buttons">
-                        Sign-Up
-      </Button>
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
@@ -54,14 +82,17 @@ const SignUpForm = () => {
                         label="password"
                         defaultValue="password"
                         variant="outlined"
+                        value={password}
+                        onChange={handleInputSignUpChange}
                     />
                     <Button
                         variant="outlined"
                         label="signInBtn"
                         color="primary"
-                        href="#outlined-buttons">
-                        Password
-        </Button>
+                        href="#outlined-buttons"
+                        onClick={handleSignUpSubmit}>
+                        Sign-Up
+                    </Button>
                 </Grid>
             </Grid>
         </div>
