@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
@@ -27,6 +28,24 @@ const App = () => {
     axios.post('/api/users/register', signUpState)
       .then(() => {
         console.log(signUpState)
+      })
+      .catch(err => console.error(err))
+  }
+
+  const [loginState, setLoginState] = useState({
+    username: '',
+    password: ''
+  })
+
+  loginState.handleInputLoginChange = event => {
+    setLoginState({ ...loginState, [event.target.name]: event.target.value})
+  }
+
+  loginState.handleLoginSubmit = event => {
+    event.preventDefault()
+    axios.post('/api/users/login', loginState)
+      .then(() => {
+        console.log(loginState)
       })
       .catch(err => console.error(err))
   }
