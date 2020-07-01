@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import axios from 'axios'
 import SignUpContext from './utils/SignUpContext'
+import LoginContext from './utils/LoginContext'
 
 const App = () => {
 
@@ -60,7 +61,9 @@ const App = () => {
             </SignUpContext.Provider>
           </Route>
           <Route path='/Login'>
-            <Login />
+            <LoginContext.Provider value={loginState}>
+              <Login />
+            </LoginContext.Provider>
           </Route>
         </Switch>
       </div>
