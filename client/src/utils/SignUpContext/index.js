@@ -1,1 +1,1 @@
-export { default } from './signUpContext.js'
+export { default } from './SignUpContext.js'

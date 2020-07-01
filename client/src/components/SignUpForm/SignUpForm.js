@@ -31,10 +31,10 @@ const SignUpForm = () => {
         email,
         username,
         password,
-        handInputSignUpChange,
+        handleInputSignUpChange,
         handleSignUpSubmit
-    } = useContext(signUpContext)
-    
+    } = useContext(SignUpContext)
+
     return (
         <div>
             <h1>Sign Up Here</h1>
@@ -45,7 +45,6 @@ const SignUpForm = () => {
                         id="outlined-required"
                         label="name"
                         name="name"
-                        defaultValue="name"
                         variant="outlined"
                         value={name}
                         onChange={handleInputSignUpChange}
@@ -57,7 +56,6 @@ const SignUpForm = () => {
                         id="outlined-required"
                         label="email"
                         name="email"
-                        defaultValue="email"
                         variant="outlined"
                         value={email}
                         onChange={handleInputSignUpChange}
@@ -69,7 +67,6 @@ const SignUpForm = () => {
                         id="outlined-required"
                         label="username"
                         name="username"
-                        defaultValue="username"
                         variant="outlined"
                         value={username}
                         onChange={handleInputSignUpChange}
@@ -80,7 +77,7 @@ const SignUpForm = () => {
                         required
                         id="outlined-required"
                         label="password"
-                        defaultValue="password"
+                        name="password"
                         variant="outlined"
                         value={password}
                         onChange={handleInputSignUpChange}
