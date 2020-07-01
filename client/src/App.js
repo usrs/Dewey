@@ -24,9 +24,9 @@ const App = () => {
 
   signUpState.handleSignUpSubmit = event => {
     event.preventDefault()
-    axios.post('/users/register', signUpState)
-      .then(({ data }) => {
-        console.log(data)
+    axios.post('/api/users/register', signUpState)
+      .then(() => {
+        console.log(signUpState)
       })
       .catch(err => console.error(err))
   }
