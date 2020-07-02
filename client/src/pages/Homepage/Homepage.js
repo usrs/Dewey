@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchForm from '../../components/SearchForm'
-import BookContextProvider from '../../utils/BookContext'
+import SearchedCard from '../../components/SearchedCard'
+// import BookContextProvider from '../../utils/BookContext'
 
 const Homepage = () => {
   
@@ -11,6 +12,7 @@ const Homepage = () => {
     <>
     <div>Homepage</div>
     <SearchForm />
+    <SearchedCard />
     </>
   )
 }

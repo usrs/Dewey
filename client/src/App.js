@@ -1,7 +1,7 @@
-import React, { useState, Component } from 'react'
-import Login from './pages/Login'
+import React, { useState } from 'react'
+// import Login from './pages/Login'
 import Homepage from './pages/Homepage'
-import BookContext from './utils/BookContext'
+// import BookContext from './utils/BookContext'
 import axios from 'axios'
 
 const App = () => {

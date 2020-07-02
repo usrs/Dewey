@@ -1,1 +1,1 @@
-export default from 'SearchedCard.js'
+export { default } from './SearchedCard.js'

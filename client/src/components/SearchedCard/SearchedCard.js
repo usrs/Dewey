@@ -1,18 +1,19 @@
-import React from "react";
-import BooksContextProvider, { BookContext } from "./BookContext";
-import BookCard from "./BookCard";
+import React from "react"
+import BooksContextProvider, { BookContext } from "../../utils/BookContext"
+import BookCard from "../BookCard"
+
 function SearchedCard() {
   return (
     <BooksContextProvider>
       <BookContext.Consumer>
         {({ isLoading, books }) => {
           if (isLoading) {
-            return <div />;
+            return <div />
           }
-          return books.map((book) => <BookCard book={book} />);
+          return books.map((book) => <BookCard book={book} />)
         }}
       </BookContext.Consumer>
     </BooksContextProvider>
-  );
+  )
 }
-export default SearchedCard;
+export default SearchedCard
