@@ -7,9 +7,12 @@ import {
 } from 'react-router-dom'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
+import Homepage from './pages/Homepage'
 import axios from 'axios'
 import SignUpContext from './utils/SignUpContext'
 import LoginContext from './utils/LoginContext'
+import LoginAlert from './components/LoginAlert'
+
 
 const App = () => {
 
@@ -27,8 +30,10 @@ const App = () => {
   signUpState.handleSignUpSubmit = event => {
     event.preventDefault()
     axios.post('/api/users/register', signUpState)
-      .then(() => {
-        console.log(signUpState)
+      .then(({ data }) => {
+        console.log(data)
+        // If data equals new user, then window.location to homepage
+        // Else, alert "User already exists, please sign in"
       })
       .catch(err => console.error(err))
   }
@@ -48,11 +53,24 @@ const App = () => {
       .then(({ data }) => {
         if (data) {
           localStorage.setItem('user', data)
-          window.location = '/'
+          axios.get('/api/users/authorize', {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('user')}`
+            }
+          })
+            .then(() => {
+              window.location="/Homepage"
+            })
+            .catch(err => console.error(err))
+          // window.location = '/Homepage'
         }  else {
-          console.log('Invalid user, please sign up')
+          console.log('something')
+          // render() {
+          //     <LoginAlert />
+          // If user, then send it to data
+          }
          }
-      })
+      )
       .catch(err => console.error(err))
   }
 
@@ -69,6 +87,9 @@ const App = () => {
             <LoginContext.Provider value={loginState}>
               <Login />
             </LoginContext.Provider>
+          </Route>
+          <Route path='/Homepage'>
+            <Homepage />
           </Route>
         </Switch>
       </div>

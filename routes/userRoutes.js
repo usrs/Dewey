@@ -25,4 +25,8 @@ router.get('/users/bookshelf ', passport.authenticate('jwt'), (req, res) => {
  res.json(req.user)
 })
 
+router.get('/users/authorize', passport.authenticate('jwt'), (req, res) => {
+    res.sendStatus(200)
+})
+
 module.exports = router
