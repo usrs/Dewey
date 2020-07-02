@@ -47,6 +47,8 @@ const App = () => {
     axios.post('/api/users/login', loginState)
       .then(() => {
         console.log(loginState)
+        const newLogin = JSON.parse(loginState)
+        const loginFiltered = newLogin.filter(log => log.username !== loginState.user)
       })
       .catch(err => console.error(err))
   }
