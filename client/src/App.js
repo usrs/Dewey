@@ -45,10 +45,13 @@ const App = () => {
   loginState.handleLoginSubmit = event => {
     event.preventDefault()
     axios.post('/api/users/login', loginState)
-      .then(() => {
-        console.log(loginState)
-        const newLogin = JSON.parse(loginState)
-        const loginFiltered = newLogin.filter(log => log.username !== loginState.user)
+      .then(({ data }) => {
+        if (data) {
+          localStorage.setItem('user', data)
+          window.location = '/'
+        }  else {
+          console.log('Invalid user, please sign up')
+         }
       })
       .catch(err => console.error(err))
   }
