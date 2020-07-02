@@ -37,12 +37,12 @@ const BookCard = (props) => {
     title={book.title}
     subheader={
       //probably isn't book.author, need to see what actual data name is
-      book.author.length ? `Created by ${book.author}` : "Creator unknown"
+      book.details.authors.length ? `Created by ${book.details.authors}` : "Creator unknown"
     }
   />
   <CardMedia
-    image={book.images.original.url}
-    title={book.title}
+    image={book.details.thumbnail_url}
+    title={book.details.title}
   />
   <CardActions>
     {showSaveButton ? (

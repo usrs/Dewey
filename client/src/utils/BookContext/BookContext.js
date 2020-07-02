@@ -30,11 +30,11 @@ class BookContextProvider extends React.Component {
   }
   handleSaveBook = (book) => {
     axios.post("/api/bookshelf", {
-      title: book.title,
-      isbn: book.identifiers.isbn_13,
-      pages: book.number_of_pages,
-      author: book.authors.name,
-      image: book.cover.medium,
+      title: book.details.title,
+      isbn: book.details.isbn_10[0],
+      pages: book.details.number_of_pages,
+      author: book.details.authors,
+      image: book.details.thumbnail_url,
     })
   }
   render() {
