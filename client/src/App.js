@@ -53,23 +53,12 @@ const App = () => {
       .then(({ data }) => {
         if (data) {
           localStorage.setItem('user', data)
-          axios.get('/api/users/authorize', {
-            headers: {
-              'Authorization': `Bearer ${localStorage.getItem('user')}`
-            }
-          })
-            .then(() => {
-              window.location="/Homepage"
-            })
-            .catch(err => console.error(err))
-          // window.location = '/Homepage'
+          window.location = '/Homepage'
         }  else {
           console.log('something')
-          // render() {
-          //     <LoginAlert />
-          // If user, then send it to data
-          }
-         }
+          } 
+        }
+         
       )
       .catch(err => console.error(err))
   }

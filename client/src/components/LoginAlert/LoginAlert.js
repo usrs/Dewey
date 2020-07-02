@@ -5,7 +5,7 @@ const LoginAlert = () => {
 
     return (
             <Alert color="primary">
-                This is a primary alert — check it out!
+                User doesn't exist, please sign up
             </Alert>
     )
 }
