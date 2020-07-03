@@ -9,17 +9,6 @@ class BookContextProvider extends React.Component {
   handleSearchBook = (event) => {
     event.preventDefault()
     var book = event.target.search.value
-    fetch('/api/books/' + book)
-      .then(response => {
-        return response.json()
-      })
-      .then(books => {
-        this.setState({ books })
-        console.log(books)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
     axios
       .get(`/api/books/${book}`)
       .then((data) => {
