@@ -1,16 +1,18 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import React from 'react'
+
+import { makeStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import Switch from '@material-ui/core/Switch'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormGroup from '@material-ui/core/FormGroup'
+import MenuItem from '@material-ui/core/MenuItem'
+import Menu from '@material-ui/core/Menu'
+import styles from '../Navbar/navbar.module.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,25 +24,28 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-}));
+  theme: {
+    backgroundColor:'#E44D2E',
+  },
+}))
 
 function Navbar() {
-  const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const classes = useStyles()
+  const [auth, setAuth] = React.useState(true)
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const open = Boolean(anchorEl)
 
   const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
+    setAuth(event.target.checked)
+  }
 
   const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   return (
     <div className={classes.root}>
@@ -52,11 +57,11 @@ function Navbar() {
         />
       </FormGroup> */}
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.theme}>
           {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h5" className={classes.title}>
             Dewey -  Your Personal Library
           </Typography>
           {auth && (
@@ -68,7 +73,8 @@ function Navbar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <img src="/Dewey_white_sm.png" alt=""/>
+                {/* <AccountCircle /> */}
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -85,15 +91,15 @@ function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                <MenuItem to='/dashboard' onClick={handleClose}>Profile</MenuItem>
+                <MenuItem to='/' onClick={handleClose}>Log Out</MenuItem>
               </Menu>
             </div>
           )}
         </Toolbar>
       </AppBar>
     </div>
-  );
+  )
 }
 
 export default Navbar

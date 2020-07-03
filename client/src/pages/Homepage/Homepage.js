@@ -8,11 +8,11 @@ const Homepage = () => {
   
   return(
     <>
-    <Navbar />
-    <SearchForm />
-    <SearchedCard />
+      <br />
+      <SearchForm />
+      <SearchedCard />
     </>
-  )
+  );
 }
 
 export default Homepage
