@@ -36,13 +36,8 @@ const App = () => {
 
   return (
     <>
-<<<<<<< HEAD
-        <div>
-      <Router>
-=======
       <Router>
         <div>
->>>>>>> 4b386eaa0f9c92b76af0a6f5cc535845bca9b6ec
           <Navbar />
           <Switch>
             <Route exact path="/">
