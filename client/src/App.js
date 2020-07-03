@@ -31,9 +31,6 @@ const App = () => {
   return(
     <>
       <Homepage />
-    <div>
-      hello world
-    </div>
     </>
   )
 }
