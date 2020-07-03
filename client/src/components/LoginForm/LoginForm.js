@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import LoginContext from '../../utils/LoginContext'
+import { TableCell } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
   padding: theme.spacing(2),
   textAlign: 'center',
   color: theme.palette.text.secondary,
+  },
+  input: {
+    align: 'center',
+    marginLeft: theme.spacing(11),
+    marginTop: theme.spacing(5)
   }
 }))
 
@@ -40,6 +46,7 @@ const LoginForm = () => {
         <Grid item xs={12}>
       <TextField
         required
+        className={classes.input}
         id="outlined-required"
         label="username"
         name="username"
@@ -51,6 +58,7 @@ const LoginForm = () => {
       <Grid item xs={12}>
         <TextField
           required
+          className={classes.input}
           id="outlined-required"
           label="password"
           name="password"

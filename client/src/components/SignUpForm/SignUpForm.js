@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import SignUpContext from '../../utils/SignUpContext'
+import { TableCell } from '@material-ui/core'
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,6 +23,14 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
+    },
+    input: {
+        marginLeft: theme.spacing(11),
+        marginTop: theme.spacing(1)
+    },
+    button: {
+        marginTop: theme.spacing(2),
+        marginLeft: theme.spacing(19)
     }
 }))
 
@@ -39,13 +49,14 @@ const SignUpForm = () => {
         <div>
             <h1>Sign Up Here</h1>
             <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid  item xs={12}>
                     <TextField
+                        className={classes.input}
                         required
                         id="outlined-required"
                         label="name"
                         name="name"
-                        variant="outlined"
+                        variant="containfiled"
                         value={name}
                         onChange={handleInputSignUpChange}
                     />
@@ -53,6 +64,7 @@ const SignUpForm = () => {
                 <Grid item xs={12}>
                     <TextField
                         required
+                        className={classes.input}
                         id="outlined-required"
                         label="email"
                         name="email"
@@ -64,6 +76,7 @@ const SignUpForm = () => {
                 <Grid item xs={12}>
                     <TextField
                         required
+                        className={classes.input}
                         id="outlined-required"
                         label="username"
                         name="username"
@@ -75,6 +88,7 @@ const SignUpForm = () => {
                 <Grid item xs={12}>
                     <TextField
                         required
+                        className={classes.input}
                         id="outlined-required"
                         label="password"
                         name="password"
@@ -82,10 +96,13 @@ const SignUpForm = () => {
                         value={password}
                         onChange={handleInputSignUpChange}
                     />
+                    </Grid>
+                    <Grid>
                     <Button
-                        variant="outlined"
+                        className={classes.button}
+                        variant="contained"
                         label="signInBtn"
-                        color="primary"
+                        // color="primary"
                         href="#outlined-buttons"
                         onClick={handleSignUpSubmit}>
                         Sign-Up
