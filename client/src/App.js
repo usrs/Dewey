@@ -36,7 +36,9 @@ const App = () => {
 
   return (
     <>
-      <Router>
+    <Navbar />
+    <Homepage />
+      {/* <Router>
         <div>
           <Navbar />
           <Switch>
@@ -51,7 +53,7 @@ const App = () => {
             </Route>
           </Switch>
         </div>
-      </Router>
+      </Router> */}
     </>
   );
 }
