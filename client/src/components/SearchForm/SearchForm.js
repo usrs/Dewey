@@ -1,10 +1,18 @@
-import React, { useState } from 'react'
-import BookContextProvider, { BookContext } from '../../utils/BookContext/BookContext'
+import React, { useState, useContext } from 'react'
+import BookContext from '../../utils/BookContext'
+//material-ui elements
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
+//card elements
+import Card from "@material-ui/core/Card"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
+import CardMedia from "@material-ui/core/CardMedia"
+import CardHeader from "@material-ui/core/CardHeader"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     color: '#FFFFFF',
-    backgroundColor: '#E44D2E', 
+    backgroundColor: '#E44D2E',
     outlineColor: '#E44D2E',
-    
+
   },
 }))
 
@@ -25,42 +33,101 @@ const SearchForm = () => {
 
   const classes = useStyles()
 
-  const [searchValue, changeSearchValue] = useState('');
+  const {
+    search,
+    books,
+    handleInputBookChange,
+    handleBookSubmit
+  } = useContext(BookContext)
 
   return (
-    <BookContextProvider>
-      <BookContext.Consumer>
-        {({ books, handleSearchBook }) => (
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
-              <form className={classes.form} onSubmit={handleSearchBook}>
-                <TextField
-                  id="outlined-basic" 
-                  placeholder="Enter you book's ISBN..." 
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="search"
-                  value={searchValue}
-                  onChange={event => changeSearchValue(event.target.value)}
-                />
-                <Button
-                  className={classes.submit}
-                  fullWidth
-                  variant="contained"
-                  type="submit"
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+        <div className={classes.paper}>
+          <form 
+          className={classes.form}
+          onSubmit={handleBookSubmit}>
+            <TextField
+              id="outlined-basic"
+              placeholder="Enter you book's ISBN..."
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="search"
+              value={search} 
+              onChange={handleInputBookChange}/>
+              <Button
+                className={classes.submit}
+                fullWidth
+                variant="contained"
+                type="submit"
+                onClick={handleBookSubmit}
                 >
-                  Search
-                </Button>
+                Search
+              </Button>
               </form>
             </div>
-          </Container>
-        )}
-      </BookContext.Consumer>
-    </BookContextProvider>
+              {
+                books.map(book => (
+                  <div key={book.id}>
+                    <Card>
+                      <CardHeader
+                        title={book.title}
+                        subheader={book.author_name}
+                      />
+                      {/* <CardMedia>
+                        <img
+                          className={classes.image}
+                          src={book.docs.cover_i}
+                          alt="book cover" />
+                      </CardMedia> */}
+                      <CardActions>
+                        {/* <Button
+                size="small"
+                color="primary"
+                href={book.details.info_url}>
+                View More Info
+                >  
+              </Button> */}
+                        <Button
+                          size="small"
+                          color="primary">
+                          Save
+              </Button>
+                      </CardActions>
+                    </Card>
+                    {/* <Card>
+                      <CardHeader
+                        title={book.ISBN.details.full_title}
+                        subheader={book.details.authors[0]}
+                      />
+                      <CardMedia>
+                        <img
+                          className={classes.image}
+                          src={book.details.thumbnail_url}
+                          alt="book cover" />
+                      </CardMedia>
+                      <CardActions>
+                        <Button
+                          size="small"
+                          color="primary"
+                          href={book.details.info_url}>
+                          View More Info
+                          >
+                        </Button>
+                        <Button
+                          size="small"
+                          color="primary">
+                          Save
+                        </Button>
+                      </CardActions>
+                    </Card> */}
+                  </div>
+                ))
+              }
+    </Container>
   )
 }
 
-export default SearchForm;
+export default SearchForm

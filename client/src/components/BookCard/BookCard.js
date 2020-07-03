@@ -1,7 +1,7 @@
-import React, { createContext } from 'react'
+import React, { useState, useContext } from 'react'
+import BookContext from '../../utils/BookContext'
 import axios from 'axios'
-import BookContextProvider from "../../utils/BookContext"
-
+import { makeStyles } from '@material-ui/core/styles'
 import Card from "@material-ui/core/Card"
 import CardActions from "@material-ui/core/CardActions"
 import CardContent from "@material-ui/core/CardContent"
@@ -10,49 +10,64 @@ import Button from "@material-ui/core/Button"
 import CardHeader from "@material-ui/core/CardHeader"
 
 
-const BookCard = (props) => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  image: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+}))
 
-  const { book, showSaveButton, handleSaveBook } = props
+const BookCard = () => {
+  
+  const classes = useStyles()
 
-  const handleSavebook = (book) => {
-    axios
-      .post("/api/bookshelf", {
-        title: book.details.title,
-        isbn: book.details.isbn_10[0],
-        pages: book.details.number_of_pages,
-        author: book.details.authors,
-        image: book.details.thumbnail_url,
-      })
-      // .then(() => {
-      //   const gifs = gifState.gifs;
-      //   const gifsFiltered = gifs.filter((giph) => giph.id !== gif.id);
-      //   setGifState({ ...gifState, gifs: gifsFiltered })
-      // })
-      .catch((err) => console.error(err));
-  };
+  const {
+    search,
+    books,
+    handleInputBookChange,
+    handleBookSubmit
+  } = useContext(BookContext)
 
   return (
-    <Card>
-  <CardHeader
-    title={book.details.title}
-    subheader={
-      book.details.authors.length ? `Created by ${book.details.authors}` : "Creator unknown"
+    <div>
+      {
+        books.map(book => (
+          <div key={book.id}>
+          <Card>
+            <CardHeader
+              title={book.title}
+              subheader={book.author_name}
+            />
+            {/* <CardMedia>
+              <img 
+              className={classes.image}
+              src={book.docs.cover_i}
+              alt="book cover" />
+            </CardMedia> */}
+            <CardActions>
+              {/* <Button
+                size="small"
+                color="primary"
+                href={book.details.info_url}>
+                View More Info
+                >  
+              </Button> */}
+              <Button
+                size="small"
+                color="primary">
+                Save
+              </Button>
+            </CardActions>
+          </Card>
+        </div>
+      ))
     }
-  />
-  <CardMedia
-    image={book.details.thumbnail_url}
-    title={book.details.title}
-  />
-  <CardActions>
-    {showSaveButton ? (
-    <Button
-      size="small"
-      color="primary"
-      onClick={() => handleSaveBook(book)}>
-      Save
-    </Button>) :null}
-  </CardActions>
-</Card>
+    </div>
   )
 }
 

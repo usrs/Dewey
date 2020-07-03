@@ -1,61 +1,52 @@
+// bring in react and useState hook
 import React, { useState } from 'react'
-import { BrowserRouter as Router,
-   Switch, 
-   Route 
-  } from "react-router-dom";
-import Login from './pages/Login'
-import Homepage from './pages/Homepage'
-import UserDash from "./pages/UserDash";
-import Navbar from './components/Navbar'
-// import BookContext from './utils/BookContext'
+// bring in axios
 import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Homepage from './pages/Homepage'
+import BookContext from './utils/BookContext/BookContext'
 
 const App = () => {
 
-  //set state
-  const [bookState, setBookState] = useState({
+  // setting state to query for books
+  const [ bookState, setBookState ] = useState({
     search:'',
     books: []
   })
 
-  // function to manage input
-  bookState.handleInputChange = event => {
+  // handling search input
+  bookState.handleInputBookChange = event => {
     setBookState({ ...bookState, [event.target.name]: event.target.value })
   }
 
-  bookState.handleSearchBook = event => {
+  // function to search api
+  bookState.handleBookSubmit = event => {
     event.preventDefault()
 
     axios.get(`/api/books/${bookState.search}`)
       .then(({ data }) => {
         console.log(data)
-        setBookState({ ...bookState, books: data})
+        let newData = [data.docs[0]]
+        console.log(newData)
+        // let arrayData = Object.keys(newData)
+        // console.log(arrayData)
+        setBookState({ ...bookState, books: newData })
+        // setBookState({ ...bookState, books: data })
       })
       .catch(err => console.error(err))
   }
-
-  return (
-    <>
-    <Navbar />
-    <Homepage />
-      {/* <Router>
-        <div>
-          <Navbar />
-          <Switch>
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <Route path="/home">
-              <Homepage />
-            </Route>
-            <Route path="/dashboard">
-              <UserDash />
-            </Route>
-          </Switch>
-        </div>
-      </Router> */}
-    </>
-  );
+  
+  return(
+    <BookContext.Provider value={bookState}>
+      <Navbar />
+      <Homepage />
+    </BookContext.Provider>
+  )
 }
 
 export default App
