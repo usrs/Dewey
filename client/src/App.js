@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
-// import Login from './pages/Login'
+import { BrowserRouter as Router,
+   Switch, 
+   Route 
+  } from "react-router-dom";
+import Login from './pages/Login'
 import Homepage from './pages/Homepage'
+import UserDash from "./pages/UserDash";
+import Navbar from './components/Navbar'
 // import BookContext from './utils/BookContext'
 import axios from 'axios'
 
@@ -28,14 +34,26 @@ const App = () => {
       .catch(err => console.error(err))
   }
 
-  return(
+  return (
     <>
-      <Homepage />
-    <div>
-      hello world
-    </div>
+      <Router>
+        <div>
+          <Navbar />
+          <Switch>
+            <Route exact path="/">
+              <Login />
+            </Route>
+            <Route path="/home">
+              <Homepage />
+            </Route>
+            <Route path="/dashboard">
+              <UserDash />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </>
-  )
+  );
 }
 
 export default App

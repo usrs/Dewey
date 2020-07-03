@@ -34,9 +34,8 @@ const BookCard = (props) => {
   return (
     <Card>
   <CardHeader
-    title={book.title}
+    title={book.details.title}
     subheader={
-      //probably isn't book.author, need to see what actual data name is
       book.details.authors.length ? `Created by ${book.details.authors}` : "Creator unknown"
     }
   />
