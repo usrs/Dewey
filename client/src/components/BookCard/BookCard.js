@@ -32,7 +32,8 @@ const BookCard = () => {
     search,
     books,
     handleInputBookChange,
-    handleBookSubmit
+    handleBookSubmit,
+    handleBookSave
   } = useContext(BookContext)
 
   return (
@@ -63,8 +64,8 @@ const BookCard = () => {
               <CardActions>
                 <Button
                   size="small"
-                  color="primary">
-                  Save
+                  onClick={() => handleBookSave(book)}>
+                  Add to library
               </Button>
               </CardActions>
             </Card>
