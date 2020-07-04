@@ -19,12 +19,12 @@ const App = () => {
     books: []
   })
 
-  // handling search input
+  // handling search input for books
   bookState.handleInputBookChange = event => {
     setBookState({ ...bookState, [event.target.name]: event.target.value })
   }
 
-  // function to search api
+  // function to search api for books based on isbn
   bookState.handleBookSubmit = event => {
     event.preventDefault()
 
@@ -40,12 +40,19 @@ const App = () => {
       })
       .catch(err => console.error(err))
   }
+
+  //function to save book
+  bookState.handleBookSave = book => {
+    console.log(book)
+  }
   
   return(
+    <>
+    <Navbar />
     <BookContext.Provider value={bookState}>
-      <Navbar />
       <Homepage />
     </BookContext.Provider>
+    </>
   )
 }
 
