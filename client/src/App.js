@@ -48,12 +48,20 @@ const App = () => {
 
     // sending book to user db
     axios.post('/api/bookshelf', {
-      isbn:
-      title:
-      author:
-      pages:
-      
+      isbn: book.isbn[0],
+      title: book.title,
+      author: book.author,
+      publishDate: book.publish_date,
+      publisher: book.publisher,
+      bookId: book.id_amazon
     })
+      .then(() =>{
+        const books = bookState.books
+        const booksFiltered = books.filter(boock => boock.id !== book.id_amazon)
+        setBookState({ ...bookState, books: booksFiltered})
+        console.log(books)
+      })
+      .catch(err => console.log(err))
   }
   
   return(

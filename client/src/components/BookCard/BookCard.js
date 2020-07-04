@@ -40,7 +40,7 @@ const BookCard = () => {
     <div>
       {
         books.map(book => (
-          <div key={book.id}>
+          <div key={book.id_amazon}>
             <Card>
               <CardHeader
                 title={book.title}
