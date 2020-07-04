@@ -43,7 +43,17 @@ const App = () => {
 
   //function to save book
   bookState.handleBookSave = book => {
+    // console log data when button clicked
     console.log(book)
+
+    // sending book to user db
+    axios.post('/api/bookshelf', {
+      isbn:
+      title:
+      author:
+      pages:
+      
+    })
   }
   
   return(

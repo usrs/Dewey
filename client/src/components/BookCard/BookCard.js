@@ -55,12 +55,6 @@ const BookCard = () => {
               <Typography>
                 {book.publisher}
               </Typography>
-              <CardMedia>
-                <img
-                  className={classes.image}
-                  src={book.cover_i}
-                  alt="book cover" />
-              </CardMedia>
               <CardActions>
                 <Button
                   size="small"
