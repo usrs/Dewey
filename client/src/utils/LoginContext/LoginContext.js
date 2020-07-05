@@ -4,7 +4,8 @@ const LoginContext = createContext({
     username: '',
     password: '',
     handleInputLoginChange: () => { },
-    handleLoginSubmit: () => { }
+    handleLoginSubmit: () => { },
+    handleSignUpDivert: () => { }
 })
 
 export default LoginContext

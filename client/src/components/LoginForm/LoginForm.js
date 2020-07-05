@@ -1,9 +1,14 @@
-import React , { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import Avatar from '@material-ui/core/Avatar'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
 import LoginContext from '../../utils/LoginContext'
+import Logo from '../../Logo/deweyWhite.png'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,16 +22,35 @@ const useStyles = makeStyles((theme) => ({
     },
     flexGrow: 1, 
   },
-  paper: {
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
+  large: {
+    width: theme.spacing(16),
+    height: theme.spacing(16),
+    marginTop: theme.spacing(3),
+    margin: "auto"
+  },
+  text: {
+    textAlign: 'center',
+    textSize: "",
+    color: "black",
+    marginLeft: theme.spacing(1),
   },
   input: {
-    align: 'center',
     marginLeft: theme.spacing(11),
-    marginTop: theme.spacing(5)
-  }
+    marginTop: theme.spacing(1),
+    background: "white",
+    borderColor: "#E44D2E",
+    borderRadius: "5px"
+  },
+  button: {
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(19),
+    color: "#E44D2E"
+  },
+  login: {
+    color: "white",
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(11)
+  },
 }))
 
 const LoginForm = () => {
@@ -36,11 +60,14 @@ const LoginForm = () => {
     username,
     password,
     handleInputLoginChange,
-    handleLoginSubmit
+    handleLoginSubmit,
+    handleSignUpDivert
   } = useContext(LoginContext)
 
   return(
     <div>
+      <Avatar alt="Dewey" src={Logo} className={classes.large} />
+      <h3 className={classes.text}>Login</h3>
       <Grid container spacing={3}>
         <Grid item xs={12}>
       <TextField
@@ -66,15 +93,21 @@ const LoginForm = () => {
           onChange={handleInputLoginChange}
         />
         <Button
-          variant="outlined"
+          variant="contained"
           label="signInBtn"
-          color="primary"
+          // color="primary"
           href="#outlined-buttons"
+          className={classes.button}
           onClick={handleLoginSubmit}>
-          Submit
+          Login
         </Button>
         </Grid>
       </Grid>
+      <Button
+        className={classes.login}
+        onClick={handleSignUpDivert}>
+        Not yet a user? Sign up
+      </Button>
     </div>
     
   )

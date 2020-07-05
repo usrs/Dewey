@@ -12,7 +12,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import SignUpContext from '../../utils/SignUpContext'
-import Logo from '../../Logo/deweyGray.png'
+import Logo from '../../Logo/deweyWhite.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     text: {
         textAlign: 'center',
         textSize: "",
-        color: "white",
+        color: "black",
         marginLeft: theme.spacing(1),
     },
     card: {
@@ -200,7 +200,7 @@ const SignUpForm = () => {
                     <Button
                         className={classes.button}
                         variant="contained"
-                        label="signInBtn"
+                        label="signUpBtn"
                         // color="primary"
                         href="#outlined-buttons"
                         onClick={handleSignUpSubmit}>

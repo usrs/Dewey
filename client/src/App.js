@@ -67,6 +67,11 @@ const App = () => {
       .catch(err => console.error(err))
   }
 
+loginState.handleSignUpDivert = event => {
+    event.preventDefault()
+    window.location = '/'
+  }
+
   return(
     <Router>
       <div>
