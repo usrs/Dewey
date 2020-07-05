@@ -71,6 +71,9 @@ const App = () => {
       .catch(err => console.error(err))
   }
 
+  signUpState.handleLoginDivert = event => {
+    event.preventDefault()
+    window.location = '/Login'
   // function to get cover image
   // bookState.handleBookImage = event => {
   //   event.preventDefault()
@@ -144,6 +147,11 @@ const App = () => {
          
       )
       .catch(err => console.error(err))
+  }
+
+loginState.handleSignUpDivert = event => {
+    event.preventDefault()
+    window.location = '/'
   }
 
   return(
