@@ -1,11 +1,12 @@
 // bring in react and useState hook
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // bring in axios
 import axios from 'axios'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
@@ -13,6 +14,10 @@ import Homepage from './pages/Homepage'
 import BookContext from './utils/BookContext'
 import LoanContext from './utils/LoanContext'
 import LoanModal from './components/LoanModal/LoanModal'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+import SignUpContext from './utils/SignUpContext'
+import LoginAlert from './components/LoginAlert'
 
 const App = () => {
 
@@ -40,6 +45,26 @@ const App = () => {
         // console.log(arrayData)
         setBookState({ ...bookState, books: newData })
         // setBookState({ ...bookState, books: data })
+    }
+  }
+  const [signUpState, setSignUpState] = useState({
+    name: '',
+    email: '',
+    username: '',
+    password: ''
+  })
+
+  signUpState.handleInputSignUpChange = event => {
+    setSignUpState({ ...signUpState, [event.target.name]: event.target.value })
+  }
+
+  signUpState.handleSignUpSubmit = event => {
+    event.preventDefault()
+    axios.post('/api/users/register', signUpState)
+      .then(({ data }) => {
+        console.log(data)
+        // If data equals new user, then window.location to homepage
+        // Else, alert "User already exists, please sign in"
       })
       .catch(err => console.error(err))
   }
@@ -93,28 +118,73 @@ const App = () => {
       })
       .catch (err => console.error(err))
   }
-  
-  // creating loan state
-  const [loanState, setLoanState ] = useState({
-    loan:''
-    //any information from the form
-  })
-  // state for LoanModal
-  loanState.handleBookLoan = event => {
 
+  const [loginState, setLoginState] = useState({
+    username: '',
+    password: ''
+  })
+
+  loginState.handleInputLoginChange = event => {
+    setLoginState({ ...loginState, [event.target.name]: event.target.value})
+  }
+
+  loginState.handleLoginSubmit = event => {
+    event.preventDefault()
+    axios.post('/api/users/login', loginState)
+      .then(({ data }) => {
+        if (data) {
+          localStorage.setItem('user', data)
+          axios.get('/api/users/authorize', {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('user')}`
+            }
+          })
+            .then(() => {
+              window.location="/Homepage"
+            })
+            .catch(err => console.error(err))
+          // window.location = '/Homepage'
+        }  else {
+          console.log('something')
+          // render() {
+          //     <LoginAlert />
+          // If user, then send it to data
+          }
+         }
+      )
+      .catch(err => console.error(err))
   }
 
   return(
-    <>
-    <Navbar />
-    <BookContext.Provider value={bookState}>
-      <Homepage />
-    </BookContext.Provider>
-    {/* <LoanContext.Provider value={loanState}>
-      <LoanModal />
-    </LoanContext.Provider> */}
-    </>
-  )
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path='/'>
+            <SignUpContext.Provider value={signUpState}>
+              <SignUp />
+            </SignUpContext.Provider>
+          </Route>
+          <Route path='/Login'>
+            <LoginContext.Provider value={loginState}>
+              <Login />
+            </LoginContext.Provider>
+          </Route>
+          <Route path='/Homepage'>
+            <Navbar />
+            <BookContext.Provider value={bookState}>
+            <Homepage />
+            </BookContext.Provider>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+    // <>
+    // <Login />
+    // <div>
+    //   hello world
+    // </div>
+    // </Router>
+    )
 }
 
 export default App

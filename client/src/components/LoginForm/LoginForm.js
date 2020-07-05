@@ -1,9 +1,10 @@
-import React from 'react'
+import React , { useContext } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+import LoginContext from '../../utils/LoginContext'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,13 @@ const useStyles = makeStyles((theme) => ({
 const LoginForm = () => {
   const classes = useStyles()
 
+  const {
+    username,
+    password,
+    handleInputLoginChange,
+    handleLoginSubmit
+  } = useContext(LoginContext)
+
   return(
     <div>
       <Grid container spacing={3}>
@@ -34,31 +42,29 @@ const LoginForm = () => {
         required
         id="outlined-required"
         label="username"
-        defaultValue="username"
+        name="username"
         variant="outlined"
+        value={username}
+        onChange={handleInputLoginChange}
       />
-      <Button 
-        variant="outlined" 
-        label="signInBtn"
-        color="primary" 
-        href="#outlined-buttons">
-        Sign-In
-      </Button>
       </Grid>
       <Grid item xs={12}>
         <TextField
           required
           id="outlined-required"
           label="password"
-          defaultValue="password"
+          name="password"
           variant="outlined"
+          value={password}
+          onChange={handleInputLoginChange}
         />
         <Button
           variant="outlined"
           label="signInBtn"
           color="primary"
-          href="#outlined-buttons">
-          Password
+          href="#outlined-buttons"
+          onClick={handleLoginSubmit}>
+          Submit
         </Button>
         </Grid>
       </Grid>
