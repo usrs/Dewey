@@ -4,11 +4,13 @@ import './app.css'
 
 const Login = () => {
   
-  return(
-    <>
+  return (
+    <div>
+      <br />
+      <br />
       <LoginForm />
-    </>
-  )
+    </div>
+  );
 }
 
 export default Login

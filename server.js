@@ -29,10 +29,6 @@ passport.use(new JWTStrategy({
 
 app.use(require('./routes'))
 
-app.get('*', (req, res) => {
- res.sendFile(join(__dirname, 'public'))
-})
-
 require('mongoose').connect(process.env.MONGODB_URI || process.env.LOCAL_URI, {
     useNewUrlParser: true,
  useUnifiedTopology: true
