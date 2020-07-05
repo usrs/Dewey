@@ -56,7 +56,7 @@ const SignUpForm = () => {
                         id="outlined-required"
                         label="name"
                         name="name"
-                        variant="containfiled"
+                        variant="contained"
                         value={name}
                         onChange={handleInputSignUpChange}
                     />
