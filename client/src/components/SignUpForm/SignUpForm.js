@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -8,7 +8,6 @@ import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
-import MuiDialogActions from '@material-ui/core/DialogActions'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import SignUpContext from '../../utils/SignUpContext'
@@ -122,13 +121,6 @@ const SignUpForm = () => {
             padding: theme.spacing(2),
         },
     }))(MuiDialogContent)
-
-    const DialogActions = withStyles((theme) => ({
-        root: {
-            margin: 0,
-            padding: theme.spacing(1),
-        },
-    }))(MuiDialogActions)
 
     
         const [open, setOpen] = React.useState(false)

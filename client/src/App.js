@@ -14,7 +14,6 @@ import Homepage from './pages/Homepage'
 import BookContext from './utils/BookContext'
 import LoanContext from './utils/LoanContext'
 import LoginContext from './utils/LoginContext'
-import LoanModal from './components/LoanModal/LoanModal'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import SignUpContext from './utils/SignUpContext'
@@ -83,7 +82,7 @@ const App = () => {
             // can't set to bookState because will replace info above
   //     })
   //     catch (err => console.error(err))
-  // }
+  }
 
   //function to save book
   bookState.handleBookSave = book => {
