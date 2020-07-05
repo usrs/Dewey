@@ -11,7 +11,6 @@ import Homepage from './pages/Homepage'
 import axios from 'axios'
 import SignUpContext from './utils/SignUpContext'
 import LoginContext from './utils/LoginContext'
-import LoginAlert from './components/LoginAlert'
 
 
 const App = () => {
