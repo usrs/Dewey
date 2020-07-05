@@ -62,6 +62,7 @@ const App = () => {
 
     // sending book to user db
     axios.post('/api/bookshelf', {
+      //needs all keys defined on Book
       isbn: book.isbn[0],
       title: book.title,
       author: book.author,
@@ -70,12 +71,27 @@ const App = () => {
       bookId: book.id_amazon
     })
       .then(() =>{
+        // remove book after saved 
         const books = bookState.books
         const booksFiltered = books.filter(boock => boock.id !== book.id_amazon)
         setBookState({ ...bookState, books: booksFiltered})
         console.log(books)
       })
       .catch(err => console.log(err))
+  }
+
+  bookState.handleDeleteBook = book => {
+    console.log(book)
+    // remove from id that mongoose provides
+    axios.delete(`/api/bookshelf/${book._id}`)
+      .then(() => {
+        // remove it from frontend array
+        // create local version on book
+        const books = JSON.parse(JSON.stringify(bookState.books))
+        const booksFiltered = books.filter(boock => boock._id !== book._id)
+        setBookState({ ...bookState, books: booksFiltered })
+      })
+      .catch (err => console.error(err))
   }
   
   // creating loan state

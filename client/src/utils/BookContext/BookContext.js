@@ -5,6 +5,8 @@ const BookContext = createContext({
   books:[],
   handleInputBookChange: () => { },
   handleBookSubmit: () => { },
-  handleBookSave: () => { }
+  handleBookSave: () => { },
+  handleDeleteBook: () => { },
+  useEffect: () => { }
 })
 export default BookContext
