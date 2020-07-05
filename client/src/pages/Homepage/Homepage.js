@@ -13,7 +13,6 @@ const Homepage = () => {
     <>
       <SearchForm />
       <BookCard />
-      <BookShelf />
     </>
   );
 }

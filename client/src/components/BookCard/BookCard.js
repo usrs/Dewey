@@ -82,10 +82,10 @@ const BookCard = () => {
                         {book.author}
                       </Typography>
                       <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                        {book.publish_date}
+                        {book.publish_date[0]}
                       </Typography>
                       <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                        {book.publisher}
+                        {book.publisher[0]}
                       </Typography>
                     </Grid>
                     <Grid item>
