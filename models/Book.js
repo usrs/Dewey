@@ -4,8 +4,9 @@ const Book = new Schema({
  isbn: String,
  title: String,
  author: String,
- pages: Number,
- image: String
+ publishDate: String,
+ publisher: String,
+ bookId: String
 })
 
 module.exports = model ('Book', Book)
