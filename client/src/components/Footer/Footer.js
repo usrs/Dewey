@@ -1,15 +1,19 @@
   
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import Copyright from '../Footer/Copyright.js'
+import Copyright from '../Footer/Copyright.js';
 
-//Need to update the website link in Copyright()
+
+const Colors =
+{
+  footerGeneral: {main : '#D8CFD1',},
+  sectionSelection: {main: '#00B596',}
+}
 const useStyles = makeStyles((theme) =>
 ({
     root:
@@ -22,18 +26,13 @@ const useStyles = makeStyles((theme) =>
     {
       padding: theme.spacing(3, 2),
       marginTop: 'auto',
-      backgroundColor:
-        theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
+      backgroundColor: Colors.footerGeneral,
     },
     spacing:
     {
         width: 500,
+        color: Colors.sectionSelection,
     },
-    about:
-    {
-        backgroundColor:
-        theme.palette
-    }
 }));
 
 
