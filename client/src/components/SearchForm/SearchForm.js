@@ -68,64 +68,6 @@ const SearchForm = () => {
               </Button>
               </form>
             </div>
-              {
-                books.map(book => (
-                  <div key={book.id}>
-                    <Card>
-                      <CardHeader
-                        title={book.title}
-                        subheader={book.author_name}
-                      />
-                      {/* <CardMedia>
-                        <img
-                          className={classes.image}
-                          src={book.docs.cover_i}
-                          alt="book cover" />
-                      </CardMedia> */}
-                      <CardActions>
-                        {/* <Button
-                size="small"
-                color="primary"
-                href={book.details.info_url}>
-                View More Info
-                >  
-              </Button> */}
-                        <Button
-                          size="small"
-                          color="primary">
-                          Save
-              </Button>
-                      </CardActions>
-                    </Card>
-                    {/* <Card>
-                      <CardHeader
-                        title={book.ISBN.details.full_title}
-                        subheader={book.details.authors[0]}
-                      />
-                      <CardMedia>
-                        <img
-                          className={classes.image}
-                          src={book.details.thumbnail_url}
-                          alt="book cover" />
-                      </CardMedia>
-                      <CardActions>
-                        <Button
-                          size="small"
-                          color="primary"
-                          href={book.details.info_url}>
-                          View More Info
-                          >
-                        </Button>
-                        <Button
-                          size="small"
-                          color="primary">
-                          Save
-                        </Button>
-                      </CardActions>
-                    </Card> */}
-                  </div>
-                ))
-              }
     </Container>
   )
 }

@@ -40,6 +40,31 @@ const App = () => {
       })
       .catch(err => console.error(err))
   }
+
+  //function to save book
+  bookState.handleBookSave = book => {
+    // console log data when button clicked
+    console.log(book)
+
+    // sending book to user db
+    axios.post('/api/bookshelf', {
+      //needs all keys defined on Book
+      isbn: book.isbn[0],
+      title: book.title,
+      author: book.author,
+      publishDate: book.publish_date,
+      publisher: book.publisher,
+      bookId: book.id_amazon
+    })
+      .then(() => {
+        // remove book after saved 
+        const books = bookState.books
+        const booksFiltered = books.filter(boock => boock.id !== book.id_amazon)
+        setBookState({ ...bookState, books: booksFiltered })
+        console.log(books)
+      })
+      .catch(err => console.log(err))
+  }
   
   return(
     <BookContext.Provider value={bookState}>
