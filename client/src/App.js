@@ -9,7 +9,10 @@ import {
 } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
-import BookContext from './utils/BookContext/BookContext'
+// bring in contexts
+import BookContext from './utils/BookContext'
+import LoanContext from './utils/LoanContext'
+import LoanModal from './components/LoanModal/LoanModal'
 
 const App = () => {
 
@@ -75,12 +78,25 @@ const App = () => {
       .catch(err => console.log(err))
   }
   
+  // creating loan state
+  const [loanState, setLoanState ] = useState({
+    loan:''
+    //any information from the form
+  })
+  // state for LoanModal
+  loanState.handleBookLoan = event => {
+
+  }
+
   return(
     <>
     <Navbar />
     <BookContext.Provider value={bookState}>
       <Homepage />
     </BookContext.Provider>
+    {/* <LoanContext.Provider value={loanState}>
+      <LoanModal />
+    </LoanContext.Provider> */}
     </>
   )
 }

@@ -99,6 +99,7 @@ const BookCard = () => {
                         </Button>
                         <Button
                           size='small'
+                          onClick={console.log('update me')}
                           >
                             Loan
                         </Button>

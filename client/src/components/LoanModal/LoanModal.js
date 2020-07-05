@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react'
-import BookContext from '../../utils/BookContext'
+import BookContext from '../../utils/LoanContext'
 //material-ui elements
+import Button from '@material-ui/core/Button'
 
 const LoanModal = () => {
 
-  const classes = useStyles()
-
   return (
-   
+    <Button variant="contained" color="primary">
+      Open Modal
+    </Button>
   )
 }
 
