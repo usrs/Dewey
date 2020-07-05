@@ -224,7 +224,7 @@ const SignUpForm = () => {
                     </DialogTitle>
                     <DialogContent dividers>
                         <Typography gutterBottom className={classes.modalTitle}>
-                            Dewey is your online personal library. It allows you to keep track of all of your books and is perfect for the reader that has a large collection lining their shelves at home. Simply search for your book by name or ISBN and save it to your collection. It's that easy.
+                            Dewey is your online personal library. It allows you to keep track of all of your books and is perfect for the reader that has a large collection lining their shelves at home. Simply search for your book by name or ISBN and save it to your digital library! It's that easy.
                         </Typography>
                     </DialogContent>
                 </Dialog>
