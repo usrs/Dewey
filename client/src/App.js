@@ -13,6 +13,7 @@ import Homepage from './pages/Homepage'
 // bring in contexts
 import BookContext from './utils/BookContext'
 import LoanContext from './utils/LoanContext'
+import LoginContext from './utils/LoginContext'
 import LoanModal from './components/LoanModal/LoanModal'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
@@ -45,7 +46,8 @@ const App = () => {
         // console.log(arrayData)
         setBookState({ ...bookState, books: newData })
         // setBookState({ ...bookState, books: data })
-    }
+    })
+    .catch(err => console.error(err))
   }
   const [signUpState, setSignUpState] = useState({
     name: '',
