@@ -26,12 +26,12 @@ const useStyles = makeStyles((theme) =>
     {
       padding: theme.spacing(3, 2),
       marginTop: 'auto',
-      backgroundColor: Colors.footerGeneral,
+      backgroundColor: '#E44D2E',
     },
     spacing:
     {
         width: 500,
-        color: Colors.sectionSelection,
+        color: '#D8CFD1',
     },
 }));
 
