@@ -28,7 +28,10 @@ const useStyles = makeStyles((theme) => ({
     input: {
         marginLeft: theme.spacing(11),
         marginTop: theme.spacing(1),
-        color: 'white'
+        background: "white",
+        // border: "1px",
+        borderColor: "E44D2E",
+        borderRadius: "5px"
     },
     button: {
         marginTop: theme.spacing(2),
@@ -51,6 +54,11 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(16),
         marginTop: theme.spacing(3),
         margin: "auto"
+    },
+    login: {
+        color: "white",
+        marginTop: theme.spacing(2),
+        marginLeft: theme.spacing(13)
     }
 }))
 
@@ -62,7 +70,8 @@ const SignUpForm = () => {
         username,
         password,
         handleInputSignUpChange,
-        handleSignUpSubmit
+        handleSignUpSubmit,
+        handleLoginDivert
     } = useContext(SignUpContext)
 
     return (
@@ -128,6 +137,11 @@ const SignUpForm = () => {
                         href="#outlined-buttons"
                         onClick={handleSignUpSubmit}>
                         Sign-Up
+                    </Button>
+                    <Button 
+                        className={classes.login}
+                        onClick={handleLoginDivert}>
+                        Already a user? Login
                     </Button>
                 </Grid>
             </Grid>

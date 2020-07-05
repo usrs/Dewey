@@ -6,7 +6,8 @@ const SignUpContext = createContext({
     username: '',
     password: '',
     handleInputSignUpChange: () => { },
-    handleSignUpSubmit: () => { }
+    handleSignUpSubmit: () => { },
+    handleLoginDivert: () => { }
 })
 
 export default SignUpContext

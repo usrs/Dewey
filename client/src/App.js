@@ -37,6 +37,11 @@ const App = () => {
       .catch(err => console.error(err))
   }
 
+  signUpState.handleLoginDivert = event => {
+    event.preventDefault()
+    window.location = '/Login'
+  }
+
   const [loginState, setLoginState] = useState({
     username: '',
     password: ''
