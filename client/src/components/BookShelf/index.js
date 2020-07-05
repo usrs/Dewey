@@ -1,1 +1,1 @@
-export default from 'BookShelf.js'
+export { default } from 'BookShelf.js'

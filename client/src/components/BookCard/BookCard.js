@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
   image: {
     marginRight: '25px',
     display: 'inline-block',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    maxWidth: '75%',
+    maxHeight: '75%',
   },
   contains: {
     display: "flex",
@@ -96,6 +96,11 @@ const BookCard = () => {
                           size='small'
                           onClick={() => handleBookSave(book)}>
                             Add to library
+                        </Button>
+                        <Button
+                          size='small'
+                          >
+                            Loan
                         </Button>
                       </CardActions>
                     </Grid>

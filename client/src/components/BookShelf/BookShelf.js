@@ -3,7 +3,7 @@ import axios from 'axios'
 import bookCard from '../BookCard'
 
 //gets all books saved to a user and creates cards for each
-function BookShelf() {
+const BookShelf = () => {
   const [isLoading, setLoadingStatus] = React.useState(true)
   const [books, setBooks] = React.useState([])
   React.useEffect(async () => {
@@ -16,4 +16,4 @@ function BookShelf() {
   }
   return books.map((book) => <BookCard book={book} />)
 }
-export default Bookshelf
+export default BookShelf
