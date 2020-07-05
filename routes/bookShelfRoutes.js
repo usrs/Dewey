@@ -13,7 +13,14 @@ router.get('/bookshelf', passport.authenticate('jwt'), (req, res) => {
 
 //  POST a book
 router.post('/bookshelf', passport.authenticate('jwt'), (req, res) => {
-   Book.create(req.body)
+   Book.create({
+     isbn: req.body.isbn,
+     title: req.body.title,
+     author: req.body.author,
+     publishDate: req.body.publishDate,
+     publsiher: req.body.publisher,
+     bookId: req.body.bookId,
+    })
     .then(book => res.json(book))
     .catch(err => console.error(err))
  })

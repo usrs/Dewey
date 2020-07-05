@@ -91,16 +91,21 @@ const App = () => {
 
     // sending book to user db
     axios.post('/api/bookshelf', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('user')}`
+      }
+    }, {
       //needs all keys defined on Book
       isbn: book.isbn[0],
       title: book.title,
-      author: book.author,
-      publishDate: book.publish_date,
-      publisher: book.publisher,
+      author: book.author_name[0],
+      publishDate: book.first_publish_year,
+      publisher: book.publisher[0],
       bookId: book.id_amazon
     })
       .then(() =>{
-        // remove book after saved 
+        // remove book after saved
+        //boock is intentional, feel free to ask Erika about it.
         const books = bookState.books
         const booksFiltered = books.filter(boock => boock.id !== book.id_amazon)
         setBookState({ ...bookState, books: booksFiltered})

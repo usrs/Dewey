@@ -86,6 +86,7 @@ const LoginForm = () => {
           label="password"
           name="password"
           variant="outlined"
+          type="password"
           value={password}
           onChange={handleInputLoginChange}
         />

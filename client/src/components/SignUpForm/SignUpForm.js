@@ -184,6 +184,7 @@ const SignUpForm = () => {
                         label="password"
                         name="password"
                         variant="outlined"
+                        type="password"
                         value={password}
                         onChange={handleInputSignUpChange}
                     />
