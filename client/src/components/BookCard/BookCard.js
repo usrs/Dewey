@@ -5,10 +5,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
 import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
-import CardHeader from '@material-ui/core/CardHeader'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
@@ -56,7 +54,7 @@ const BookCard = () => {
     <div>
       {
         books.map(book => (
-          <div key={book.id_amazon} className={classes.root}>
+          <div key={book.isbn[0]} className={classes.root}>
             <Container component="main" maxWidth="s" className={classes.contains}>
               <CssBaseline />
               <Paper className={classes.paper}>

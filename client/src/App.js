@@ -13,6 +13,7 @@ import {
 // import AlertTemplate from 'react-alert-template-basic'
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
+import UserDash from './pages/UserDash'
 // bring in contexts
 import BookContext from './utils/BookContext'
 import LoanContext from './utils/LoanContext'
@@ -21,6 +22,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import SignUpContext from './utils/SignUpContext'
 import LoginAlert from './components/LoginAlert'
+import BookShelfContext from './utils/BookShelfContext'
 
 const App = () => {
 
@@ -106,27 +108,36 @@ const App = () => {
 
     axios.get(`/api/books/${bookState.search}`)
       .then(({ data }) => {
-        console.log(data)
-        let newData = [data.docs[0]]
-        console.log(newData)
-        // let arrayData = Object.keys(newData)
-        // console.log(arrayData)
-        setBookState({ ...bookState, books: newData })
+        if (data) {
+          console.log(data)
+          let newData = [data.docs[0]]
+          console.log(newData)
+          // let arrayData = Object.keys(newData)
+          // console.log(arrayData)
+          setBookState({ ...bookState, books: newData })
         // setBookState({ ...bookState, books: data })
+        } else {
+          console.log('nothin here chief')
+          let newData = {
+            title: 'No Book Found!',
+            author: 'try searching again'
+          }
+          setBookState({ ...bookState, books: newData })
+        }
       })
       .catch(err => console.error(err))
   }
 
   // function to get cover image
-  // bookState.handleBookImage = event => {
-  //   event.preventDefault()
+  bookState.handleBookImage = event => {
+    event.preventDefault()
 
-  //   axios.get(`/api/books/${bookState.search}`)
-  //     .then(({ data }) => {
-            // can't set to bookState because will replace info above
-  //     })
-  //     catch (err => console.error(err))
-  //}
+    axios.get(`/api/books/${bookState.search}`)
+      .then(({ data }) => {
+            //can't set to bookState because will replace info above
+      })
+      .catch (err => console.error(err))
+  }
 
   //function to save book
   bookState.handleBookSave = book => {
@@ -141,7 +152,7 @@ const App = () => {
       author: book.author_name[0],
       publishDate: book.first_publish_year,
       publisher: book.publisher[0],
-      bookId: book.id_amazon[0]
+      bookId: book.isbn[0]
     }, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('id')}`
@@ -151,7 +162,7 @@ const App = () => {
         // remove book after saved
         //boock is intentional, feel free to ask Erika about it.
         const books = bookState.books
-        const booksFiltered = books.filter(boock => boock.id !== book.id_amazon)
+        const booksFiltered = books.filter(boock => boock.id !== book.bookId)
         setBookState({ ...bookState, books: booksFiltered})
         console.log(book)
         console.log('this is as far as we got')
@@ -192,7 +203,7 @@ const App = () => {
                 <SignUp />
             </SignUpContext.Provider>
           </Route>
-          <Route path='/Login'>
+          <Route exact path='/Login'>
             <LoginContext.Provider value={loginState}>
               <Login />
             </LoginContext.Provider>
@@ -202,6 +213,11 @@ const App = () => {
             <BookContext.Provider value={bookState}>
             <Homepage />
             </BookContext.Provider>
+          </Route>
+          <Route path='/UserDash'>
+            <Navbar />
+            <UserDash />
+            
           </Route>
         </Switch>
       </div>

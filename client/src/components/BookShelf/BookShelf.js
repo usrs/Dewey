@@ -1,7 +1,6 @@
-import React, { useContext } from 'react'
-import BookContext from '../../utils/BookContext'
-// bring in BookCard component
-import BookCard from '../BookCard'
+import React, { useContext, useEffect, useState } from 'react'
+import BookShelfContext from '../../utils/BookShelfContext'
+import axios from 'axios'
 // material-ui elements
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -43,32 +42,30 @@ const BookShelf = () => {
 
   const classes = useStyles()
 
-  const {
-    search,
-    books,
-    handleInputBookChange,
-    handleBookSubmit,
-    handleBookSave,
-    handleDeleteBook,
-    useEffect
-  } = useContext(BookContext)
+  const [bookShelfState, setBookShelfState] = useState({
+    books: []
+  })
 
-  // when page loads want to get all cards
-  // useEffect(() => {
-  //   axios.get('/api/bookshelf')
-  //     .then(({ data }) => {
-  //       console.log(data)
-  //       //if all data from cards appears above, should be able to setState to build cards from db
-  //       setBookState({ ...bookState, books: data })
-  //     })
-  //     .catch(err => console.log(err))
-  // })
+  // to render user's book cards on load
+  useEffect(() => {
+    axios.get('/api/bookshelf', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('id')}`
+      }
+    })
+      .then(({ data }) => {
+        console.log(data)
+        setBookShelfState({ ...bookShelfState, books: data.books })
+      })
+      .catch(err => console.error(err))
+  }, [])
 
-  // below book. needs to match keys in book model
   return(
     <div>
       {
-        books.map(book => (
+        bookShelfState.books.map(book => { 
+          console.log(book)
+          return (
           <div key={book.bookId} className={classes.root}>
             <Container component="main" maxWidth="s" className={classes.contains}>
               <CssBaseline />
@@ -105,8 +102,7 @@ const BookShelf = () => {
                         <CardActions>
                           <Button
                             size='small'
-                            color='danger'
-                            onClick={() => handleDeleteBook(book)}>
+                            color='danger'>
                             Remove from Library
                           </Button>
                           <Button
@@ -123,7 +119,7 @@ const BookShelf = () => {
               </Paper>
             </Container>
           </div>
-        ))
+        )})
       }
     </div>
   )
