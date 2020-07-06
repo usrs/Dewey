@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
 import BookShelfContext from '../../utils/BookShelfContext'
-// bring in BookCard component
-import BookShelfCard from '../BookShelfCard'
 import axios from 'axios'
 // material-ui elements
 import { makeStyles } from '@material-ui/core/styles'
