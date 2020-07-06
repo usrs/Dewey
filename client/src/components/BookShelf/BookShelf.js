@@ -46,6 +46,22 @@ const BookShelf = () => {
     books: []
   })
 
+  // function to delete
+  bookShelfState.handleDeleteBook = book => {
+    // console.log(book)
+    axios.delete(`/api/bookshelf/${book._id}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('id')}`
+      }
+    })
+      .then(() => {
+        const books = JSON.parse(JSON.stringify(bookShelfState.books))
+        const booksFiltered = books.filter(boock => boock._id !== book._id)
+        setBookShelfState({ ...bookShelfState, books: booksFiltered })
+      })
+      .catch(err => console.error(err))
+  }
+
   // to render user's book cards on load
   useEffect(() => {
     axios.get('/api/bookshelf', {
@@ -102,7 +118,8 @@ const BookShelf = () => {
                         <CardActions>
                           <Button
                             size='small'
-                            color='danger'>
+                            color='danger'
+                            onClick={() => bookShelfState.handleDeleteBook(book)}>
                             Remove from Library
                           </Button>
                           <Button
