@@ -21,6 +21,20 @@ import LoginAlert from './components/LoginAlert'
 
 const App = () => {
 
+  // set signUp state for user to register
+  const [signUpState, setSignUpState] = useState({
+    name: '',
+    email: '',
+    username: '',
+    password: ''
+  })
+
+  // handles change in signUp inputs
+  signUpState.handleInputSignUpChange = event => {
+    setSignUpState({ ...signUpState, [event.target.name]: event.target.value })
+  }
+
+  // function to send user signUp data to db
   signUpState.handleSignUpSubmit = event => {
     event.preventDefault()
     axios.post('/api/users/register', signUpState)
@@ -32,14 +46,49 @@ const App = () => {
       .catch(err => console.error(err))
   }
 
+  // function to redirect user if credentials not valid
   signUpState.handleLoginDivert = event => {
     event.preventDefault()
     window.location = '/Login'
   }
 
+  // set user login state
+  const [loginState, setLoginState] = useState({
+    username: '',
+    password: ''
+  })
+
+  // handles change in login inputs
+  loginState.handleInputLoginChange = event => {
+    setLoginState({ ...loginState, [event.target.name]: event.target.value })
+  }
+
+  // submits login credentials to db
+  loginState.handleLoginSubmit = event => {
+    event.preventDefault()
+    axios.post('/api/users/login', loginState)
+      .then(({ data }) => {
+        if (data) {
+          localStorage.setItem('id', data)
+          window.location = '/Homepage'
+        } else {
+          console.log('something')
+        }
+      }
+
+      )
+      .catch(err => console.error(err))
+  }
+
+  // if valid user send them to homepage
+  loginState.handleSignUpDivert = event => {
+    event.preventDefault()
+    window.location = '/'
+  }
+
   // setting state to query for books
-  const [ bookState, setBookState ] = useState({
-    search:'',
+  const [bookState, setBookState] = useState({
+    search: '',
     books: []
   })
 
@@ -61,18 +110,8 @@ const App = () => {
         // console.log(arrayData)
         setBookState({ ...bookState, books: newData })
         // setBookState({ ...bookState, books: data })
-    })
-    .catch(err => console.error(err))
-  }
-  const [signUpState, setSignUpState] = useState({
-    name: '',
-    email: '',
-    username: '',
-    password: ''
-  })
-
-  signUpState.handleInputSignUpChange = event => {
-    setSignUpState({ ...signUpState, [event.target.name]: event.target.value })
+      })
+      .catch(err => console.error(err))
   }
 
   // function to get cover image
@@ -129,36 +168,6 @@ const App = () => {
         setBookState({ ...bookState, books: booksFiltered })
       })
       .catch (err => console.error(err))
-  }
-
-  const [loginState, setLoginState] = useState({
-    username: '',
-    password: ''
-  })
-
-  loginState.handleInputLoginChange = event => {
-    setLoginState({ ...loginState, [event.target.name]: event.target.value})
-  }
-
-  loginState.handleLoginSubmit = event => {
-    event.preventDefault()
-    axios.post('/api/users/login', loginState)
-      .then(({ data }) => {
-        if (data) {
-          localStorage.setItem('id', data)
-          window.location = '/Homepage'
-        }  else {
-          console.log('something')
-          } 
-        }
-         
-      )
-      .catch(err => console.error(err))
-  }
-
-loginState.handleSignUpDivert = event => {
-    event.preventDefault()
-    window.location = '/'
   }
 
   return(
