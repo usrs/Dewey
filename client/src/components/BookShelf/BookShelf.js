@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
-import BookContext from '../../utils/BookContext'
+import BookShelfContext from '../../utils/BookShelfContext'
 // bring in BookCard component
 import BookShelfCard from '../BookShelfCard'
+import axios from 'axios'
 // material-ui elements
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -44,25 +45,20 @@ const BookShelf = () => {
   const classes = useStyles()
 
   const {
-    search,
     books,
-    handleInputBookChange,
-    handleBookSubmit,
-    handleBookSave,
-    handleDeleteBook,
     useEffect
-  } = useContext(BookContext)
+  } = useContext(BookShelfContext)
 
   // when page loads want to get all cards
-  // useEffect(() => {
-  //   axios.get('/api/bookshelf')
-  //     .then(({ data }) => {
-  //       console.log(data)
-  //       //if all data from cards appears above, should be able to setState to build cards from db
-  //       setBookState({ ...bookState, books: data })
-  //     })
-  //     .catch(err => console.log(err))
-  // })
+  useEffect(() => {
+    axios.get('/api/bookshelf')
+      .then(({ data }) => {
+        console.log(data)
+        //if all data from cards appears above, should be able to setState to build cards from db
+        // setBookShelfState({ ...bookShelfState, books: data })
+      })
+      .catch(err => console.log(err))
+  })
 
   // below book. needs to match keys in book model
   return(
@@ -105,8 +101,7 @@ const BookShelf = () => {
                         <CardActions>
                           <Button
                             size='small'
-                            color='danger'
-                            onClick={() => handleDeleteBook(book)}>
+                            color='danger'>
                             Remove from Library
                           </Button>
                           <Button

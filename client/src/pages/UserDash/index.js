@@ -1,1 +1,1 @@
-export { default } from './UserDash'
+export { default } from './UserDash.js'

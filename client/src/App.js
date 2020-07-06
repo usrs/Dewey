@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
+import UserDash from './pages/UserDash'
 // bring in contexts
 import BookContext from './utils/BookContext'
 import LoanContext from './utils/LoanContext'
@@ -18,6 +19,7 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import SignUpContext from './utils/SignUpContext'
 import LoginAlert from './components/LoginAlert'
+import BookShelfContext from './utils/BookShelfContext'
 
 const App = () => {
 
@@ -179,6 +181,20 @@ const App = () => {
       .catch (err => console.error(err))
   }
 
+  const [bookShelfState, setBookShelfState] = useState({
+    books: []
+  })
+
+  // to render user's book cards on load
+  // bookShelfState.useEffect(() => {
+  //   axios.get('/api/bookshelf')
+  //     .then(({ data }) => {
+  //       console.log(data)
+  //       setBookShelfState({ ...bookShelfState, bookShelfState: data })
+  //     })
+  //     .catch(err => console.error(err))
+  // }, [])
+
   return(
     <Router>
       <div>
@@ -188,7 +204,7 @@ const App = () => {
               <SignUp />
             </SignUpContext.Provider>
           </Route>
-          <Route path='/Login'>
+          <Route exact path='/Login'>
             <LoginContext.Provider value={loginState}>
               <Login />
             </LoginContext.Provider>
@@ -198,6 +214,12 @@ const App = () => {
             <BookContext.Provider value={bookState}>
             <Homepage />
             </BookContext.Provider>
+          </Route>
+          <Route path='/UserDash'>
+            <Navbar />
+            <BookShelfContext.Provider value={bookShelfState} >
+              <UserDash />
+            </BookShelfContext.Provider>
           </Route>
         </Switch>
       </div>

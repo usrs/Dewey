@@ -1,12 +1,11 @@
 import React from 'react'
-import Bookshelf from '../../components/BookShelf'
-
+import BookShelf from '../../components/BookShelf'
 
 const UserDash = () => {
 
   return (
-    <Bookshelf />
+    <BookShelf />
   )
 }
 
-export default from UserDash
+export default UserDash

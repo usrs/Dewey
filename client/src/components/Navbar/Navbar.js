@@ -1,4 +1,5 @@
 import React from 'react'
+import UserDash from '../../pages/UserDash'
 
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -85,7 +86,7 @@ function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem to='/dashboard' onClick={handleClose}>Profile</MenuItem>
+                <MenuItem to='/UserDashboard' onClick={handleClose}>Profile</MenuItem>
                 <MenuItem to='/' onClick={handleClose}>Log Out</MenuItem>
               </Menu>
             </div>
