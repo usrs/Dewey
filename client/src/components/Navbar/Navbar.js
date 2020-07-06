@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import UserDash from '../../pages/UserDash'
 import {
   BrowserRouter as Router,
@@ -31,7 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+
+
 function Navbar() {
+
   const classes = useStyles()
   const [auth, /*setAuth*/] = React.useState(true)
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -47,6 +50,12 @@ function Navbar() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleLogoutSubmit = event => {
+    console.log('ping!')
+    localStorage.removeItem('id')
+    window.location = '/Login'
   }
 
   return (
@@ -93,14 +102,8 @@ function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <Router>
-                  <Link to='/UserDash'>
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  </Link>
-                  
-                  <MenuItem to='/' onClick={handleClose}>Log Out</MenuItem>
-                </Router>
-                
+                <MenuItem to='/dashboard' onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleLogoutSubmit}>Log Out</MenuItem>
               </Menu>
             </div>
           )}

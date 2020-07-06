@@ -8,6 +8,9 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
+// import { render } from 'react-dom'
+// import { useAlert, Provider as AlertProvider } from 'react-alert'
+// import AlertTemplate from 'react-alert-template-basic'
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
 import UserDash from './pages/UserDash'
@@ -181,13 +184,23 @@ const App = () => {
       .catch (err => console.error(err))
   }
 
+  // For alerts npm
+  // const options = {
+  //   position: 'bottom center',
+  //   timeout: 5000,
+  //   offset: '30px',
+  //   transition: 'scale'
+  // }
+
+  // const alert = useAlert()
+
   return(
     <Router>
       <div>
         <Switch>
           <Route exact path='/'>
             <SignUpContext.Provider value={signUpState}>
-              <SignUp />
+                <SignUp />
             </SignUpContext.Provider>
           </Route>
           <Route exact path='/Login'>
