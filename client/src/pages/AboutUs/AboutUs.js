@@ -12,6 +12,10 @@ import Favorite from "@material-ui/icons/Favorite";
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 
+// Sections for this page
+import Team from "./Sections/Team.js";
+import ContactUS from "./Sections/ContactUS.js";
+
 /*
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -31,9 +35,8 @@ const AboutUs = () =>
     (
         <div>
             <Navbar/>
-
-
-
+            <Team/>
+            <ContactUS/>
             <Footer/>
         </div>
     );
