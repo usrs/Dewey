@@ -4,9 +4,9 @@ const passport = require('passport')
 
 // GET user library
 router.get('/bookshelf', passport.authenticate('jwt'), (req, res) => {
-  Book.find()
+  User.findById(req.user._id)
   //needs to populate whole card, come back to this...
-   .populate('title')
+    .populate('books')
    .then(books => res.json(books))
    .catch(err => console.error(err))
  })
@@ -18,7 +18,7 @@ router.post('/bookshelf', passport.authenticate('jwt'), (req, res) => {
      title: req.body.title,
      author: req.body.author,
      publishDate: req.body.publishDate,
-     publsiher: req.body.publisher,
+     publisher: req.body.publisher,
      bookId: req.body.bookId
     })
     .then(book => {
@@ -28,7 +28,7 @@ router.post('/bookshelf', passport.authenticate('jwt'), (req, res) => {
           title: book.title,
           author: book.author,
           publishDate: book.publishDate,
-          publsiher: book.publisher,
+          publisher: book.publisher,
           bookId: book.bookId
         }))
         .catch(err => console.error(err))

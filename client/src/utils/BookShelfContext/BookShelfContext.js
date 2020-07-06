@@ -1,8 +1,7 @@
 import { createContext } from 'react'
 
 const BookShelfContext = createContext({
-  books: [],
-  useEffect: () => { }
+  books: []
 })
 
 export default BookShelfContext

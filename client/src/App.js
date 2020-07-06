@@ -126,15 +126,15 @@ const App = () => {
   }
 
   // function to get cover image
-  // bookState.handleBookImage = event => {
-  //   event.preventDefault()
+  bookState.handleBookImage = event => {
+    event.preventDefault()
 
-  //   axios.get(`/api/books/${bookState.search}`)
-  //     .then(({ data }) => {
-            // can't set to bookState because will replace info above
-  //     })
-  //     catch (err => console.error(err))
-  //}
+    axios.get(`/api/books/${bookState.search}`)
+      .then(({ data }) => {
+            //can't set to bookState because will replace info above
+      })
+      .catch (err => console.error(err))
+  }
 
   //function to save book
   bookState.handleBookSave = book => {
@@ -181,20 +181,6 @@ const App = () => {
       .catch (err => console.error(err))
   }
 
-  const [bookShelfState, setBookShelfState] = useState({
-    books: []
-  })
-
-  // to render user's book cards on load
-  useEffect(() => {
-    axios.get('/api/bookshelf')
-      .then(({ data }) => {
-        console.log(data)
-        setBookShelfState({ ...bookShelfState, bookShelfState: data })
-      })
-      .catch(err => console.error(err))
-  }, [])
-
   return(
     <Router>
       <div>
@@ -217,9 +203,8 @@ const App = () => {
           </Route>
           <Route path='/UserDash'>
             <Navbar />
-            <BookShelfContext.Provider value={bookShelfState} >
-              <UserDash />
-            </BookShelfContext.Provider>
+            <UserDash />
+            
           </Route>
         </Switch>
       </div>

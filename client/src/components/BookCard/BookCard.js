@@ -54,7 +54,7 @@ const BookCard = () => {
     <div>
       {
         books.map(book => (
-          <div key={book.id_amazon} className={classes.root}>
+          <div key={book.isbn[0]} className={classes.root}>
             <Container component="main" maxWidth="s" className={classes.contains}>
               <CssBaseline />
               <Paper className={classes.paper}>

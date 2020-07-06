@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import BookShelfContext from '../../utils/BookShelfContext'
 import axios from 'axios'
 // material-ui elements
@@ -42,29 +42,30 @@ const BookShelf = () => {
 
   const classes = useStyles()
 
-  const {
-    books,
-  } = useContext(BookShelfContext)
+  const [bookShelfState, setBookShelfState] = useState({
+    books: []
+  })
 
-  // when page loads want to get all cards
+  // to render user's book cards on load
   useEffect(() => {
     axios.get('/api/bookshelf', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('id')}`
-      }})
+      }
+    })
       .then(({ data }) => {
         console.log(data)
-        //if all data from cards appears above, should be able to setState to build cards from db
-        // setBookShelfState({ ...bookShelfState, books: data })
+        setBookShelfState({ ...bookShelfState, books: data.books })
       })
-      .catch(err => console.log(err))
-  })
+      .catch(err => console.error(err))
+  }, [])
 
-  // below book. needs to match keys in book model
   return(
     <div>
       {
-        books.map(book => (
+        bookShelfState.books.map(book => { 
+          console.log(book)
+          return (
           <div key={book.bookId} className={classes.root}>
             <Container component="main" maxWidth="s" className={classes.contains}>
               <CssBaseline />
@@ -118,7 +119,7 @@ const BookShelf = () => {
               </Paper>
             </Container>
           </div>
-        ))
+        )})
       }
     </div>
   )
