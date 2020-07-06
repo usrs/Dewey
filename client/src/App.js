@@ -186,14 +186,14 @@ const App = () => {
   })
 
   // to render user's book cards on load
-  // bookShelfState.useEffect(() => {
-  //   axios.get('/api/bookshelf')
-  //     .then(({ data }) => {
-  //       console.log(data)
-  //       setBookShelfState({ ...bookShelfState, bookShelfState: data })
-  //     })
-  //     .catch(err => console.error(err))
-  // }, [])
+  useEffect(() => {
+    axios.get('/api/bookshelf')
+      .then(({ data }) => {
+        console.log(data)
+        setBookShelfState({ ...bookShelfState, bookShelfState: data })
+      })
+      .catch(err => console.error(err))
+  }, [])
 
   return(
     <Router>

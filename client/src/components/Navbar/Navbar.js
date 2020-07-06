@@ -1,5 +1,12 @@
 import React from 'react'
 import UserDash from '../../pages/UserDash'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link
+} from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -86,8 +93,14 @@ function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem to='/UserDashboard' onClick={handleClose}>Profile</MenuItem>
-                <MenuItem to='/' onClick={handleClose}>Log Out</MenuItem>
+                <Router>
+                  <Link to='/UserDash'>
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  </Link>
+                  
+                  <MenuItem to='/' onClick={handleClose}>Log Out</MenuItem>
+                </Router>
+                
               </Menu>
             </div>
           )}
