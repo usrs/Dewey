@@ -14,6 +14,7 @@ import {
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
 import UserDash from './pages/UserDash'
+import Footer from './components/Footer'
 // bring in contexts
 import BookContext from './utils/BookContext'
 import LoanContext from './utils/LoanContext'
@@ -184,42 +185,32 @@ const App = () => {
       .catch (err => console.error(err))
   }
 
-  // For alerts npm
-  // const options = {
-  //   position: 'bottom center',
-  //   timeout: 5000,
-  //   offset: '30px',
-  //   transition: 'scale'
-  // }
-
-  // const alert = useAlert()
-
   return(
     <Router>
       <div>
         <Switch>
-          <Route exact path='/'>
+          <Route exact path="/">
             <SignUpContext.Provider value={signUpState}>
                 <SignUp />
             </SignUpContext.Provider>
           </Route>
-          <Route exact path='/Login'>
+          <Route exact path="/Login">
             <LoginContext.Provider value={loginState}>
               <Login />
             </LoginContext.Provider>
           </Route>
-          <Route path='/Homepage'>
+          <Route path="/Homepage">
             <Navbar />
             <BookContext.Provider value={bookState}>
-            <Homepage />
+              <Homepage />
             </BookContext.Provider>
           </Route>
-          <Route path='/UserDash'>
+          <Route path="/UserDash">
             <Navbar />
             <UserDash />
-            
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
     // <>
@@ -228,7 +219,7 @@ const App = () => {
     //   hello world
     // </div>
     // </Router>
-    )
+  );
 }
 
 export default App

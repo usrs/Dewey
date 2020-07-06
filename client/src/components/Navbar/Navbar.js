@@ -84,7 +84,7 @@ function Navbar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <img src="/Dewey_white_sm.png" alt=""/>
+                <img src="./assests/icon/Dewey_white_sm.png" alt=""/>
                 {/* <AccountCircle /> */}
               </IconButton>
               <Menu
