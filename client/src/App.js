@@ -132,17 +132,17 @@ const App = () => {
 
     // sending book to user db
     axios.post('/api/bookshelf', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem(JSON.stringify('id'))}`
-      }
-    }, {
       //needs all keys defined on Book
       isbn: book.isbn[0],
       title: book.title,
       author: book.author_name[0],
       publishDate: book.first_publish_year,
       publisher: book.publisher[0],
-      bookId: book.id_amazon
+      bookId: book.id_amazon[0]
+    }, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('id')}`
+      }
     })
       .then(() =>{
         // remove book after saved

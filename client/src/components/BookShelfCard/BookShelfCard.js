@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const BookCard = () => {
+//books need to be mapped from user array
+const BookShelfCard = () => {
 
   const classes = useStyles()
 
@@ -92,8 +93,9 @@ const BookCard = () => {
                       <CardActions>
                         <Button
                           size='small'
-                          onClick={() => handleBookSave(book)}>
-                            Add to library
+                          onClick={console.log('loan feature still needed')}
+                          >
+                            Loan
                         </Button>
                       </CardActions>
                     </Grid>
@@ -109,4 +111,4 @@ const BookCard = () => {
   )
 }
 
-export default BookCard
+export default BookShelfCard
