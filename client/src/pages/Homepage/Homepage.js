@@ -9,6 +9,7 @@ const Homepage = () => {
   return (
     <>
       <br />
+      <Navbar/>
       <SearchForm />
       <SearchedCard />
       <Footer />
