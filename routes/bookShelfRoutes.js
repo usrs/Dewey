@@ -43,4 +43,19 @@ router.delete('/bookshelf/:id', passport.authenticate('jwt'), (req, res) => {
     .catch(err => console.error(err))
 })
 
+//  POST a book loan
+router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
+  Book.findByIdAndUpdate({
+    isLoaned: req.body.loan
+  })
+    .then(book => {
+      User.findByIdAndUpdate(req.user._id, { $push: { books: book._id } })
+        .then(() => res.json({
+          isLoaned: book.isLoaned
+        }))
+        .catch(err => console.error(err))
+    })
+    .catch(err => console.error(err))
+})
+
   module.exports = router
