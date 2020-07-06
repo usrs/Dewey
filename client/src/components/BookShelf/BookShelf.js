@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import BookContext from '../../utils/BookContext'
 // bring in BookCard component
-import BookCard from '../BookCard'
+import BookShelfCard from '../BookShelfCard'
 // material-ui elements
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'

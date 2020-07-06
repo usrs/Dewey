@@ -103,13 +103,22 @@ const App = () => {
 
     axios.get(`/api/books/${bookState.search}`)
       .then(({ data }) => {
-        console.log(data)
-        let newData = [data.docs[0]]
-        console.log(newData)
-        // let arrayData = Object.keys(newData)
-        // console.log(arrayData)
-        setBookState({ ...bookState, books: newData })
+        if (data) {
+          console.log(data)
+          let newData = [data.docs[0]]
+          console.log(newData)
+          // let arrayData = Object.keys(newData)
+          // console.log(arrayData)
+          setBookState({ ...bookState, books: newData })
         // setBookState({ ...bookState, books: data })
+        } else {
+          console.log('nothin here chief')
+          let newData = {
+            title: 'No Book Found!',
+            author: 'try searching again'
+          }
+          setBookState({ ...bookState, books: newData })
+        }
       })
       .catch(err => console.error(err))
   }
@@ -138,7 +147,7 @@ const App = () => {
       author: book.author_name[0],
       publishDate: book.first_publish_year,
       publisher: book.publisher[0],
-      bookId: book.id_amazon[0]
+      bookId: book.isbn[0]
     }, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('id')}`
@@ -148,7 +157,7 @@ const App = () => {
         // remove book after saved
         //boock is intentional, feel free to ask Erika about it.
         const books = bookState.books
-        const booksFiltered = books.filter(boock => boock.id !== book.id_amazon)
+        const booksFiltered = books.filter(boock => boock.id !== book.bookId)
         setBookState({ ...bookState, books: booksFiltered})
         console.log(book)
         console.log('this is as far as we got')
