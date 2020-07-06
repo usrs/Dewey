@@ -21,6 +21,22 @@ import LoginAlert from './components/LoginAlert'
 
 const App = () => {
 
+  signUpState.handleSignUpSubmit = event => {
+    event.preventDefault()
+    axios.post('/api/users/register', signUpState)
+      .then(({ data }) => {
+        console.log(data)
+        // If data equals new user, then window.location to homepage
+        // Else, alert "User already exists, please sign in"
+      })
+      .catch(err => console.error(err))
+  }
+
+  signUpState.handleLoginDivert = event => {
+    event.preventDefault()
+    window.location = '/Login'
+  }
+
   // setting state to query for books
   const [ bookState, setBookState ] = useState({
     search:'',
@@ -59,20 +75,6 @@ const App = () => {
     setSignUpState({ ...signUpState, [event.target.name]: event.target.value })
   }
 
-  signUpState.handleSignUpSubmit = event => {
-    event.preventDefault()
-    axios.post('/api/users/register', signUpState)
-      .then(({ data }) => {
-        console.log(data)
-        // If data equals new user, then window.location to homepage
-        // Else, alert "User already exists, please sign in"
-      })
-      .catch(err => console.error(err))
-  }
-
-  signUpState.handleLoginDivert = event => {
-    event.preventDefault()
-    window.location = '/Login'
   // function to get cover image
   // bookState.handleBookImage = event => {
   //   event.preventDefault()
@@ -82,7 +84,7 @@ const App = () => {
             // can't set to bookState because will replace info above
   //     })
   //     catch (err => console.error(err))
-  }
+  //}
 
   //function to save book
   bookState.handleBookSave = book => {
@@ -92,7 +94,7 @@ const App = () => {
     // sending book to user db
     axios.post('/api/bookshelf', {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('user')}`
+        'Authorization': `Bearer ${localStorage.getItem(JSON.stringify('id'))}`
       }
     }, {
       //needs all keys defined on Book
@@ -109,7 +111,8 @@ const App = () => {
         const books = bookState.books
         const booksFiltered = books.filter(boock => boock.id !== book.id_amazon)
         setBookState({ ...bookState, books: booksFiltered})
-        console.log(books)
+        console.log(book)
+        console.log('this is as far as we got')
       })
       .catch(err => console.log(err))
   }
@@ -142,7 +145,7 @@ const App = () => {
     axios.post('/api/users/login', loginState)
       .then(({ data }) => {
         if (data) {
-          localStorage.setItem('user', data)
+          localStorage.setItem('id', data)
           window.location = '/Homepage'
         }  else {
           console.log('something')

@@ -22,6 +22,7 @@ router.post('/bookshelf', passport.authenticate('jwt'), (req, res) => {
      bookId: req.body.bookId,
     })
     .then(book => res.json(book))
+    .then(console.log(req.body))
     .catch(err => console.error(err))
  })
 

@@ -97,7 +97,7 @@ const BookCard = () => {
                         </Button>
                         <Button
                           size='small'
-                          onClick={console.log('update me')}
+                          onClick={console.log('loan feature still needed')}
                           >
                             Loan
                         </Button>
