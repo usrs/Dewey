@@ -19,10 +19,20 @@ router.post('/bookshelf', passport.authenticate('jwt'), (req, res) => {
      author: req.body.author,
      publishDate: req.body.publishDate,
      publsiher: req.body.publisher,
-     bookId: req.body.bookId,
+     bookId: req.body.bookId
     })
-    .then(book => res.json(book))
-    .then(console.log(req.body))
+    .then(book => {
+      User.findByIdAndUpdate(req.user._id, { $push: {books: book._id }})
+        .then(() => res.json ({
+          isbn: book.isbn,
+          title: book.title,
+          author: book.author,
+          publishDate: book.publishDate,
+          publsiher: book.publisher,
+          bookId: book.bookId
+        }))
+        .catch(err => console.error(err))
+    })
     .catch(err => console.error(err))
  })
 

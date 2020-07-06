@@ -6,10 +6,7 @@ const User = new Schema({
  name: String,
  books: [{
   type: Schema.Types.ObjectId,
-  ref: 'Book',
-  loanedto: String,
-  loanedEmail: String,
-  loanedPhone: String
+  ref: 'Book'
  }]
 })
 
