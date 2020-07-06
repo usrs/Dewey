@@ -1,34 +1,68 @@
-import React, { useState } from 'react'
-import BookContextProvider, { BookContext } from '../../utils/BookContext/BookContext'
+import React, { useContext } from 'react'
+import BookContext from '../../utils/BookContext'
+//material-ui elements
+import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Container from '@material-ui/core/Container'
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+  submit: {
+    color: '#FFFFFF',
+    backgroundColor: '#E44D2E',
+    outlineColor: '#E44D2E',
+
+  },
+}))
 
 const SearchForm = () => {
-  const [searchValue, changeSearchValue] = useState('');
+
+  const classes = useStyles()
+
+  const {
+    search,
+    handleInputBookChange,
+    handleBookSubmit
+  } = useContext(BookContext)
 
   return (
-    <BookContextProvider>
-      <BookContext.Consumer>
-        {({ books, handleSearchBook }) => (
-          <form onSubmit={handleSearchBook}>
-            <TextField
-              label="Search Book"
-              name="search"
-              value={searchValue}
-              onChange={event => changeSearchValue(event.target.value)}
-            />
-            <Button
-              variant="outlined"
-              color="primary"
-              type="submit"
-            >
-              Search
-            </Button>
-          </form>
-        )}
-      </BookContext.Consumer>
-    </BookContextProvider>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <form
+          className={classes.form}
+          onSubmit={handleBookSubmit}>
+          <TextField
+            id="outlined-basic"
+            placeholder="Enter you book's ISBN..."
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="search"
+            value={search}
+            onChange={handleInputBookChange} />
+          <Button
+            className={classes.submit}
+            fullWidth
+            variant="contained"
+            type="submit"
+            onClick={handleBookSubmit}
+          >
+            Search
+          </Button>
+        </form>
+      </div>
+    </Container>
   )
 }
 
-export default SearchForm;
+export default SearchForm

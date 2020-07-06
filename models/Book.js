@@ -4,8 +4,13 @@ const Book = new Schema({
  isbn: String,
  title: String,
  author: String,
- pages: Number,
- image: String
+ publishDate: String,
+ publisher: String,
+ isLoaned: {
+   type: Boolean,
+  default: false
+  },
+ bookId: String
 })
 
 module.exports = model ('Book', Book)

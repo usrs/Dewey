@@ -1,20 +1,17 @@
 import React from 'react'
 import SearchForm from '../../components/SearchForm'
-import SearchedCard from '../../components/SearchedCard'
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
+import BookCard from '../../components/BookCard/BookCard'
+import BookShelf from '../../components/BookShelf/BookShelf'
 // import BookContextProvider from '../../utils/BookContext'
 
 const Homepage = () => {
+
   return (
     <>
-      <br />
-      <Navbar/>
       <SearchForm />
-      <SearchedCard />
-      <Footer />
+      <BookCard />
     </>
-  );
+  )
 }
 
 export default Homepage

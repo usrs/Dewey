@@ -4,17 +4,35 @@ const passport = require('passport')
 
 // GET user library
 router.get('/bookshelf', passport.authenticate('jwt'), (req, res) => {
-  Book.find()
+  User.findById(req.user._id)
   //needs to populate whole card, come back to this...
-   .populate('title')
+    .populate('books')
    .then(books => res.json(books))
    .catch(err => console.error(err))
  })
 
 //  POST a book
 router.post('/bookshelf', passport.authenticate('jwt'), (req, res) => {
-   Book.create(req.body)
-    .then(book => res.json(book))
+   Book.create({
+     isbn: req.body.isbn,
+     title: req.body.title,
+     author: req.body.author,
+     publishDate: req.body.publishDate,
+     publisher: req.body.publisher,
+     bookId: req.body.bookId
+    })
+    .then(book => {
+      User.findByIdAndUpdate(req.user._id, { $push: {books: book._id }})
+        .then(() => res.json ({
+          isbn: book.isbn,
+          title: book.title,
+          author: book.author,
+          publishDate: book.publishDate,
+          publisher: book.publisher,
+          bookId: book.bookId
+        }))
+        .catch(err => console.error(err))
+    })
     .catch(err => console.error(err))
  })
 
@@ -22,6 +40,21 @@ router.post('/bookshelf', passport.authenticate('jwt'), (req, res) => {
 router.delete('/bookshelf/:id', passport.authenticate('jwt'), (req, res) => {
   Book.findByIdAndDelete(req.params.id)
     .then(() => res.sendStatus(200))
+    .catch(err => console.error(err))
+})
+
+//  POST a book loan
+router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
+  Book.findByIdAndUpdate({
+    isLoaned: req.body.loan
+  })
+    .then(book => {
+      User.findByIdAndUpdate(req.user._id, { $push: { books: book._id } })
+        .then(() => res.json({
+          isLoaned: book.isLoaned
+        }))
+        .catch(err => console.error(err))
+    })
     .catch(err => console.error(err))
 })
 
