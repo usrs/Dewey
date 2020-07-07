@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -10,6 +10,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
+import { Collapse, Navbar, NavbarToggler, Alert } from 'reactstrap'
 import SignUpContext from '../../utils/SignUpContext'
 import Logo from '../../Logo/deweyWhite.png'
 
@@ -64,12 +65,29 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
         marginLeft: theme.spacing(13)
     },
+    what: {
+        color: "white",
+        marginTop: theme.spacing(2),
+        marginLeft: theme.spacing(15)
+    },
     closeButton: {
         position: 'absolute',
         right: theme.spacing(1),
         top: theme.spacing(1),
         color: theme.palette.grey[500],
     },
+    alert: {
+        marginTop: theme.spacing(2),
+        marginLeft: theme.spacing(10)
+    },
+    text: {
+        color: "#E44D2E"
+    },
+    link: {
+        fontWeight: "bold",
+        color: "#E44D2E",
+        textDecoration: "underline"
+    }
 }))
 
 const styles = (theme) => ({
@@ -102,7 +120,7 @@ const DialogTitle = withStyles(styles)((props) => {
         )
     })
 
-const SignUpForm = () => {
+const SignUpForm = props => {
     const classes = useStyles()
     const {
         name,
@@ -131,6 +149,9 @@ const SignUpForm = () => {
         const handleClose = () => {
             setOpen(false)
         }
+
+    const [collapsed, setCollapsed] = useState(true);
+    const toggleNavbar = () => setCollapsed(!collapsed);
 
     return (
 
@@ -196,9 +217,17 @@ const SignUpForm = () => {
                         label="signUpBtn"
                         // color="primary"
                         href="#outlined-buttons"
-                        onClick={handleSignUpSubmit}>
+                        onClick={
+                           handleSignUpSubmit,
+                           toggleNavbar
+                            }>
                         join dewey
                     </Button>
+                        <Collapse isOpen={!collapsed} className={classes.alert}>
+                            <Alert color="light" className={classes.text}>
+                                Success! please login <a href="/Login" className="alert-link" className={classes.link}>here</a>
+                            </Alert>
+                        </Collapse>
                     <Button 
                         className={classes.login}
                         onClick={handleLoginDivert}>
@@ -208,7 +237,7 @@ const SignUpForm = () => {
             </Grid>
         </div>
         <div>
-                <Button className={classes.login} variant="filled" color="primary" onClick={handleClickOpen}>
+                <Button className={classes.what} variant="text" color="primary" onClick={handleClickOpen}>
                     What is dewey?
       </Button>
                 <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
