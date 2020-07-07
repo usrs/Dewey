@@ -14,12 +14,12 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
-import styles from "assets/jss/landingPageSections/teamStyle.js";
+import styles from "src/assets/jss/landingPageSections/teamStyle.js";
 
-import Nathan from "assets/teamMembers/Nathan.jpg";
-import Erika from "assets/teamMembers/Erika.jpg";
-import Michael from "assets/teamMembers/Michael.jpg";
-import Jonathn from "assets/teamMembers/Jonathan.jpg";
+import Nathan from "src/assets/teamMembers/Nathan.jpg";
+import Erika from "src/assets/teamMembers/Erika.jpg";
+import Michael from "src/assets/teamMembers/Michael.jpg";
+import Jonathan from "src/assets/teamMembers/Jonathan.jpg";
 //import Tree's
 
 const useStyles = makeStyles(styles);

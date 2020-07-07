@@ -64,9 +64,12 @@ const StickyFooter = () => {
               
             <BottomNavigation value={value} onChange={(event, newValue) => {setValue(newValue);}} showLabels className={classes.spacing}>
 
+              <Link to='/Homepage'>
                 <BottomNavigationAction label="Home" href="client\src\pages\Homepage\Homepage.js"> Home </BottomNavigationAction>
+              </Link> 
+              <Link to='/AboutUs'>
                 <BottomNavigationAction label="About Us" href="client\src\pages\AboutUs\AboutUs.js"> About Us</BottomNavigationAction>
-
+              </Link>
             </BottomNavigation>
             <Copyright />
             </Container>
