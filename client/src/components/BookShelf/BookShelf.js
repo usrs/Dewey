@@ -80,8 +80,14 @@ const BookShelf = () => {
       name: document.querySelector('input[name="name"]').value,
       phone: document.querySelector('input[name="phone"]').value,
       email: document.querySelector('input[name="email"]').value
-    });
-  };
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("id")}`,
+      }
+    })
+    .then()
+    .catch((err) => console.error(err))
+  }
 
   // to render user's book cards on load
   useEffect(() => {
@@ -92,11 +98,11 @@ const BookShelf = () => {
         },
       })
       .then(({ data }) => {
-        console.log(data);
-        setBookShelfState({ ...bookShelfState, books: data.books });
+        console.log(data)
+        setBookShelfState({ ...bookShelfState, books: data.books })
       })
-      .catch((err) => console.error(err));
-  }, []);
+      .catch((err) => console.error(err))
+  }, [])
 
   return (
     <div>
@@ -188,9 +194,9 @@ const BookShelf = () => {
                               <h2 id="simple-modal-title">Text in a modal</h2>
                               <form>
                               {/* Form or Button */}
-                              <input type="text" name="name" />
-                              <input type="tel" name="phone" />
-                              <input type="email" name="email" />
+                              <input placeholder="Name" type="text" name="name" />
+                              <input placeholder="Mobile Number" type="tel" name="phone" />
+                              <input placeholder="Email" type="email" name="email" />
                               <Button
                               type="submit"
                               onClick={(event) => {
