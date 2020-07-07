@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { Modal } from "@material-ui/core";
+import { render } from "react-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,6 +69,10 @@ const BookShelf = () => {
   const [bookShelfState, setBookShelfState] = useState({
     books: [],
   });
+  
+  const [loanBookState, setLoanBookState] = useState({
+    loaned: [],
+  })
 
   bookShelfState.handleDeleteBook = book => {
     // console.log(book)
@@ -84,7 +89,7 @@ const BookShelf = () => {
       .catch(err => console.error(err))
   }
 
-  // to render user's book cards on load
+  // to render user's SAVED book cards on load
   useEffect(() => {
     axios
       .get("/api/bookshelf", {
@@ -99,13 +104,31 @@ const BookShelf = () => {
       .catch((err) => console.error(err))
   }, [])
 
+
+
+
+  // to render user's LOANED books
+  useEffect(() => {
+    axios.get('/api/bookshelf', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('id')}`
+      }
+    })
+      .then(() => {
+        // remove book after saved
+        //boock is intentional, feel free to ask Erika about it.
+        const loaned = loanBookState.loaned
+        const loanBooksFiltered = loaned.filter(loans => loans.isLoaned === true)
+        setLoanBookState({ ...loanBookState, loaned: loanBooksFiltered })
+        console.log(loaned)
+      })
+      .catch(err => console.error(err))
+  }, [])
+
   const [isOpen, setOpenStatus] = useState(false);
   const [modalStyle] = React.useState(getModalStyle)
 
   const handleBookLoan = (book) => {
-    // make the axios post request here
-    /*make isLoaned true
-     */
     axios.post(`/api/bookshelf/loan/${book._id}`, {
       name: document.querySelector('input[name="name"]').value,
       phone: document.querySelector('input[name="phone"]').value,
@@ -115,13 +138,78 @@ const BookShelf = () => {
         Authorization: `Bearer ${localStorage.getItem("id")}`,
       }
     })
-    .then()
+    .then(() => {
+      render(
+   
+      )
+    })
     .catch((err) => console.error(err))
   }
 
   return (
+    <>
+      <div>
+        <h5>Loaned Books</h5>'
+        {
+          loanBookState.loaned.map(loan => {
+            console.log(loan)
+            return (
+              <div key={loan.bookId} className={classes.root}>
+                <Container component="main" maxWidth="s" className={classes.contains}>
+                  <CssBaseline />
+                  <Paper className={classes.paper}>
+                    <Grid container spacing={3}>
+                      <Grid item xs>
+                        <CardMedia>
+                          <img
+                            className={classes.image}
+                            src="http://covers.openlibrary.org/b/isbn/9781593275846.jpg"
+                            alt="book cover" />
+                        </CardMedia>
+                      </Grid>
+                      <Grid item xs sm container>
+                        <Grid item xs container direction="column" spacing={2}>
+                          <Grid item xs>
+                            <Typography className={classes.typograph} gutterBottom variant="h5">
+                              {loan.title}
+                            </Typography>
+                            <Typography className={classes.typograph} gutterBottom variant="h6">
+                              {loan.isbn}
+                            </Typography>
+                            <Typography className={classes.typograph} variant="body2" gutterBottom>
+                              {loan.author}
+                            </Typography>
+                            <Typography className={classes.typograph} variant="body2" color="textSecondary">
+                              {loan.name}
+                            </Typography>
+                            <Typography className={classes.typograph} variant="body2" color="textSecondary">
+                              {loan.email}
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <CardActions>
+                              <Button
+                                size='small'
+                                onClick={console.log('update me')}
+                              >
+                                Return
+                        </Button>
+                            </CardActions>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </Container>
+              </div>
+            )
+          })
+        }
+      </div>
     <div>
-      {bookShelfState.books.map((book) => {
+      <h5>Your Library</h5>
+      {
+      bookShelfState.books.map((book) => {
         console.log(book);
         return (
           <div key={book.bookId} className={classes.root}>
@@ -237,6 +325,7 @@ const BookShelf = () => {
         );
       })}
     </div>
+    </>
   );
 };
 

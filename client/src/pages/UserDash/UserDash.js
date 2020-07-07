@@ -31,20 +31,20 @@ const UserDash = () => {
 
   return (
     <div className={classes.root}>
-      <Grid className={classes.border} container spacing={3}>
+      {/* <Grid className={classes.border} container spacing={3}>
         <Grid item xs className={classes.shelf}>
           <Paper className={classes.paper}>
             <h5>Loaned Books</h5>
             <LoanBook />
           </Paper>
-        </Grid>
-        <Grid item xs className={classes.shelf}>
-          <Paper className={classes.paper}>
-            <h5>Your Library</h5>
+        </Grid> */}
+        {/* <Grid item xs className={classes.shelf}>
+          <Paper className={classes.paper}> */}
+            {/* <h5>Your Library</h5> */}
             <BookShelf />
-          </Paper>
+          {/* </Paper>
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   )
 }
