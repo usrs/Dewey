@@ -28,9 +28,9 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '75%',
   },
   contains: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: '25px',
   },
 }))
@@ -43,6 +43,10 @@ const LoanBook = () => {
     books: []
   })
 
+  loanBookState.handleReturnSubmit = book => {
+
+  }
+  
   // to render user's book cards on load
   useEffect(() => {
     axios.get('/api/bookshelf', {
@@ -51,12 +55,10 @@ const LoanBook = () => {
       }
     })
       .then(() => {
-        // remove book after saved
-        //boock is intentional, feel free to ask Erika about it.
         const books = loanBookState.books
-        const loanBooksFiltered = books.filter(boock => boock.isLoaned === true)
+        const loanBooksFiltered = books.filter(loans => loans.isLoaned === true)
         setLoanBookState({ ...loanBookState, books: loanBooksFiltered })
-        console.log(books)
+        // console.log(books)
       })
       .catch(err => console.error(err))
   }, [])
@@ -68,35 +70,50 @@ const LoanBook = () => {
           console.log(book)
           return (
             <div key={book.bookId} className={classes.root}>
-              <Container component="main" maxWidth="s" className={classes.contains}>
+              <Container 
+              component="main" 
+              maxWidth="s" 
+              className={classes.contains}>
                 <CssBaseline />
                 <Paper className={classes.paper}>
-                  <Grid container spacing={3}>
-                    <Grid item xs>
+                  <Grid container spacing={12}>
+                    <Grid 
+                    direction="row"
+                      justify="space-around"
+                      alignItems="flex-start"
+                      item xs={6}>
                       <CardMedia>
                         <img
                           className={classes.image}
-                          src="http://covers.openlibrary.org/b/isbn/9781593275846.jpg"
-                          alt="book cover" />
+                          src="./books_image_2.jpg"
+                          alt="book shelf" />
                       </CardMedia>
                     </Grid>
-                    <Grid item xs sm container>
-                      <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs={6} sm container>
+                      <Grid 
+                      item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                          <Typography className={classes.typograph} gutterBottom variant="h5">
+                          <Typography
+                            className={classes.typograph}
+                            gutterBottom
+                            variant="h6">
                             {book.title}
                           </Typography>
-                          <Typography className={classes.typograph} gutterBottom variant="h6">
-                            {book.isbn}
+                          <Typography
+                            className={classes.typograph}
+                            gutterBottom
+                            variant="h7">
+                            ISBN: {book.isbn}
                           </Typography>
-                          <Typography className={classes.typograph} variant="body2" gutterBottom>
-                            {book.author}
+                          <Typography className={classes.typograph} variant="body2"
+                          color="textSecondary">
+                            Author: {book.author}
                           </Typography>
                           <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                            {book.publishDate}
+                            Published: {book.publishDate}
                           </Typography>
                           <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                            {book.publisher}
+                            Publisher: {book.publisher}
                           </Typography>
                         </Grid>
                         <Grid item>
@@ -104,9 +121,9 @@ const LoanBook = () => {
                             <Button
                               size='small'
                               onClick={console.log('update me')}
-                            >
+                              >
                               Return
-                        </Button>
+                            </Button>
                           </CardActions>
                         </Grid>
                       </Grid>
