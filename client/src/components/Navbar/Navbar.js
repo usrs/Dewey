@@ -73,7 +73,7 @@ function Navbar() {
           {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h5" className={classes.title}>
+          <Typography variant="h6" className={classes.title}>
             Dewey -  Your Personal Library
           </Typography>
           {auth && (
