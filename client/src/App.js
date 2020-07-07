@@ -185,6 +185,19 @@ const App = () => {
       .catch (err => console.error(err))
   }
 
+
+
+  // function to get cover image
+  // bookState.handleBookImage = event => {
+  //   event.preventDefault()
+
+  //   axios.get(`/api/books/${bookState.search}`)
+  //     .then(({ data }) => {
+            // can't set to bookState because will replace info above
+  //     })
+  //     catch (err => console.error(err))
+  // }
+  
   return(
     <Router>
       <div>
