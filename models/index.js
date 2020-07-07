@@ -1,4 +1,4 @@
-Module.exports = {
- Dewey: require('Dewey.js')
-Add any additional models here
+module.exports = {
+ Book: require('./Book.js'),
+ User: require('./User.js')
 }
