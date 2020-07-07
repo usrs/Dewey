@@ -120,7 +120,7 @@ const LoanBook = () => {
                           <CardActions>
                             <Button
                               size='small'
-                              onClick={consle.log('update me')}
+                              onClick={console.log('update me')}
                               >
                               Return
                             </Button>

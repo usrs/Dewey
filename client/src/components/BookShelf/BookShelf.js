@@ -88,18 +88,26 @@ const BookShelf = () => {
   }
 
   // to render user's SAVED book cards on load
-  useEffect(() => {
-    axios.get("/api/bookshelf", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("id")}`,
-        },
-      })
-      .then(({ data }) => {
-        // console.log(data)
-        setBookShelfState({ ...bookShelfState, books: data.books })
-      })
-      .catch((err) => console.error(err))
-  }, [])
+  // useEffect(() => {
+  //   axios.get("/api/bookshelf", {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("id")}`,
+  //       },
+  //     })
+  //     .then(({ data }) => {
+  //       data.forEach(books => {
+  //         if (books.isLoaned === false) {
+  //           setBookShelfState({ ...bookShelfState, books: data.books })
+  //         } else {
+  //           setBookShelfState({ ...bookShelfState, loaned: data.books })
+  //         }
+  //       })
+  //       console.log(bookShelfState.books)
+  //       console.log(bookShelfState.loaned)
+  //     })
+  //     .catch((err) => console.error(err))
+  // }, [])
+  
 
   // to render user's LOANED books
   useEffect(() => {
@@ -108,13 +116,15 @@ const BookShelf = () => {
         'Authorization': `Bearer ${localStorage.getItem('id')}`
       }
     })
-      .then(() => {
+      .then((data) => {
+        console.log(data)
+        setBookShelfState({ ...bookShelfState, books: data.books })
+        console.log(bookShelfState.books)
         // remove book after saved
         //boock is intentional, feel free to ask Erika about it.
-        const loaned = loanBookState.loaned
-        const loanBooksFiltered = loaned.filter(loans => loans.isLoaned === true)
-        setLoanBookState({ ...loanBookState, loaned: loanBooksFiltered })
-        // console.log(loaned)
+        // const books = bookShelfState.books
+        // const loanBooksFiltered = books.filter(loans => loans.isLoaned === true)
+        // setBookShelfState({ ...bookShelfState, loaned: loanBooksFiltered })
       })
       .catch(err => console.error(err))
   }, [])
@@ -138,89 +148,32 @@ const BookShelf = () => {
     .catch((err) => console.error(err))
   }
 
-  bookShelfState.updateLoanShelf = (book) =>{
-    axios.put(`/api/bookshelf/loan/${book._id}`, {
-      // setting is loaned to opposite of current value
-      book.isLoaned= !isLoaned,
-      name: document.querySelector('input[name="name"]').value,
-      phone: document.querySelector('input[name="phone"]').value,
-      email: document.querySelector('input[name="email"]').value
-    })
-    .then(() =>{
-      // update item with id and change to have new is loaned value
+  // bookShelfState.updateLoanShelf = (book) =>{
+  //   axios.put(`/api/bookshelf/loan/${book._id}`, {
+  //     // setting is loaned to opposite of current value
+  //     book.isLoaned= !isLoaned,
+  //     name: document.querySelector('input[name="name"]').value,
+  //     phone: document.querySelector('input[name="phone"]').value,
+  //     email: document.querySelector('input[name="email"]').value
+  //   })
+  //   .then(() =>{
+  //     // update item with id and change to have new is loaned value
 
-      // local copy of array
-      const loaned = JSON.parse(JSON.stringify(loanBookState.loaned))
-      loaned.forEach(loan => {
-        if(loan._id === id ) {
-          book.isLoaned = !isLoaned
-        }
-      })
-      setbookShelfState({ ...bookShelfState, books })
-    })
-    .catch(err => console.error(err))
-  }
+  //     // local copy of array
+  //     const loaned = JSON.parse(JSON.stringify(loanBookState.loaned))
+  //     loaned.forEach(loan => {
+  //       if(loan._id === id ) {
+  //         book.isLoaned = !isLoaned
+  //       }
+  //     })
+  //     setbookShelfState({ ...bookShelfState, books })
+  //   })
+  //   .catch(err => console.error(err))
+  // }
 
   return (
     <>
     <ThemeProvider theme={theme}>
-      {/* <div>
-        {
-          loanBookState.loaned.map(loan => {
-            console.log(loan)
-            return (
-              <div key={loan.bookId} className={classes.root}>
-                <Container component="main" maxWidth="s" className={classes.contains}>
-                  <CssBaseline />
-                  <Paper className={classes.paper}>
-                    <Grid container spacing={3}>
-                      <Grid item xs>
-                        <CardMedia>
-                          <img
-                            className={classes.image}
-                            src="http://covers.openlibrary.org/b/isbn/9781593275846.jpg"
-                            alt="book cover" />
-                        </CardMedia>
-                      </Grid>
-                      <Grid item xs sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                          <Grid item xs>
-                            <Typography className={classes.typograph} gutterBottom variant="h5">
-                              {loan.title}
-                            </Typography>
-                            <Typography className={classes.typograph} gutterBottom variant="h6">
-                              {loan.isbn}
-                            </Typography>
-                            <Typography className={classes.typograph} variant="body2" gutterBottom>
-                              {loan.author}
-                            </Typography>
-                            <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                              {loan.name}
-                            </Typography>
-                            <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                              {loan.email}
-                            </Typography>
-                          </Grid>
-                          <Grid item>
-                            <CardActions>
-                              <Button
-                                size='small'
-                                onClick={console.log('update me')}
-                              >
-                                Return
-                        </Button>
-                            </CardActions>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                </Container>
-              </div>
-            )
-          })
-        }
-      </div> */}
     <div>
       {
       bookShelfState.books.map((book) => {
