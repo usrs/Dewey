@@ -87,7 +87,22 @@ const BookShelf = () => {
       .catch(err => console.error(err))
   }
 
-  // to render user's SAVED book cards on load
+  //working useEffect
+  useEffect(() => {
+    axios
+      .get("/api/bookshelf", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("id")}`,
+        },
+      })
+      .then(({ data }) => {
+        console.log(data)
+        setBookShelfState({ ...bookShelfState, books: data.books })
+      })
+      .catch((err) => console.error(err))
+  }, [])
+
+  //to render user's SAVED book cards on load
   // useEffect(() => {
   //   axios.get("/api/bookshelf", {
   //       headers: {
@@ -109,25 +124,25 @@ const BookShelf = () => {
   // }, [])
   
 
-  // to render user's LOANED books
-  useEffect(() => {
-    axios.get('/api/bookshelf', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('id')}`
-      }
-    })
-      .then((data) => {
-        console.log(data)
-        setBookShelfState({ ...bookShelfState, books: data.books })
-        console.log(bookShelfState.books)
-        // remove book after saved
-        //boock is intentional, feel free to ask Erika about it.
-        // const books = bookShelfState.books
-        // const loanBooksFiltered = books.filter(loans => loans.isLoaned === true)
-        // setBookShelfState({ ...bookShelfState, loaned: loanBooksFiltered })
-      })
-      .catch(err => console.error(err))
-  }, [])
+  // //to render user's LOANED books
+  // useEffect(() => {
+  //   axios.get('/api/bookshelf', {
+  //     headers: {
+  //       'Authorization': `Bearer ${localStorage.getItem('id')}`
+  //     }
+  //   })
+  //     .then((data) => {
+  //       console.log(data)
+  //       setBookShelfState({ ...bookShelfState, books: data.books })
+  //       console.log(bookShelfState.books)
+  //       // remove book after saved
+  //       //boock is intentional, feel free to ask Erika about it.
+  //       // const books = bookShelfState.books
+  //       // const loanBooksFiltered = books.filter(loans => loans.isLoaned === true)
+  //       // setBookShelfState({ ...bookShelfState, loaned: loanBooksFiltered })
+  //     })
+  //     .catch(err => console.error(err))
+  // }, [])
 
   const [isOpen, setOpenStatus] = useState(false);
   const [modalStyle] = React.useState(getModalStyle)
