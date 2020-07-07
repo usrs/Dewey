@@ -7,15 +7,30 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Copyright from '../Footer/Copyright.js';
+import './Footer.css'
 
-
-const Colors =
+const media = 
 {
-  footerGeneral: {main : '#D8CFD1',},
-  sectionSelection: {main: '#00B596',}
+  xs: (styles) => `
+  @media only screen and (max-width: 480px){
+    ${styles} 
+  }`
 }
+
+const responsiveStyles = makeStyles((theme) =>
+  {
+    root:
+    {
+
+    }
+    xs: (styles) =>
+    `@media only screen and (max-width: 480px){${styles}}`
+  }
+)
+
 const useStyles = makeStyles((theme) =>
-({
+(
+  {
     root:
     {
       display: 'flex',
@@ -33,21 +48,23 @@ const useStyles = makeStyles((theme) =>
         width: 500,
         color: '#D8CFD1',
     },
-}));
+  }
+));
 
 
 const StickyFooter = () => {
     const classes = useStyles();
+    const respClasses = responsiveStyles();
     const [value, setValue] = React.useState(0);
 
     return (
         
-        <div className={classes.root}>
+        <div className={`classes.root respClasses.root`}>
         <CssBaseline />
-        <footer className={classes.footer}>
+        <footer className={`classes.footer respClasses.footer`}>
           <Container maxWidth="sm">
               
-            <BottomNavigation value={value} onChange={(event, newValue) => {setValue(newValue);}} showLabels className={classes.spacing}>
+            <BottomNavigation value={value} onChange={(event, newValue) => {setValue(newValue);}} showLabels className={`classes.spacing respClasses.spacing`}>
 
                 <BottomNavigationAction label="Home" href="../pages/Homepage/Homepage.js"/>
                 <BottomNavigationAction label="About Us" href="../pages/Homepage/index.js"/>
