@@ -66,4 +66,10 @@ router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
     .catch((err) => res.status(500).send(err))
 })
 
+router.put('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
+  Book.findByIdAndUpdate(req.params.id, { $set: req.body})
+    .then(() => res.sendStatus(200))
+    .catch(err => console.error(err))
+})
+
   module.exports = router

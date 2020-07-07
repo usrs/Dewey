@@ -69,11 +69,7 @@ const BookShelf = () => {
 
   const [bookShelfState, setBookShelfState] = useState({
     books: [],
-  });
-  
-  const [loanBookState, setLoanBookState] = useState({
     loaned: [],
-    isLoaned: false,
   })
 
   bookShelfState.handleDeleteBook = book => {
@@ -140,6 +136,29 @@ const BookShelf = () => {
     
     })
     .catch((err) => console.error(err))
+  }
+
+  bookShelfState.updateLoanShelf = (book) =>{
+    axios.put(`/api/bookshelf/loan/${book._id}`, {
+      // setting is loaned to opposite of current value
+      book.isLoaned= !isLoaned,
+      name: document.querySelector('input[name="name"]').value,
+      phone: document.querySelector('input[name="phone"]').value,
+      email: document.querySelector('input[name="email"]').value
+    })
+    .then(() =>{
+      // update item with id and change to have new is loaned value
+
+      // local copy of array
+      const loaned = JSON.parse(JSON.stringify(loanBookState.loaned))
+      loaned.forEach(loan => {
+        if(loan._id === id ) {
+          book.isLoaned = !isLoaned
+        }
+      })
+      setbookShelfState({ ...bookShelfState, books })
+    })
+    .catch(err => console.error(err))
   }
 
   return (
