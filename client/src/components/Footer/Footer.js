@@ -8,14 +8,25 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Copyright from '../Footer/Copyright.js';
 
-
-const Colors =
+/*
+const media = 
 {
-  footerGeneral: {main : '#D8CFD1',},
-  sectionSelection: {main: '#00B596',}
+  xs: (styles) => `
+  @media only screen and (max-width: 480px){
+    ${styles} 
+  }`
 }
+
+const responsiveStyles = makeStyles((theme) =>
+  {
+    xs:
+    `@media only screen and (max-width: 480px){${theme}}`
+  }
+)*/
+
 const useStyles = makeStyles((theme) =>
-({
+(
+  {
     root:
     {
       display: 'flex',
@@ -30,10 +41,11 @@ const useStyles = makeStyles((theme) =>
     },
     spacing:
     {
-        width: 500,
         color: '#D8CFD1',
+        margin: 'auto',
     },
-}));
+  }
+));
 
 
 const StickyFooter = () => {
@@ -49,7 +61,7 @@ const StickyFooter = () => {
               
             <BottomNavigation value={value} onChange={(event, newValue) => {setValue(newValue);}} showLabels className={classes.spacing}>
 
-                <BottomNavigationAction label="Home" href="../pages/Homepage/Homepage.js"/>
+                <BottomNavigationAction label="Home" href="client\src\pages\Homepage\Homepage.js"/>
                 <BottomNavigationAction label="About Us" href="../pages/Homepage/index.js"/>
                 <BottomNavigationAction label="Contact Us" href="../pages/Homepage/Homepage.js"/>
 
