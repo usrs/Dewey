@@ -76,6 +76,11 @@ const BookShelf = () => {
     // make the axios post request here
     /*make isLoaned true
      */
+    axios.post(`/api/bookshelf/loan/${book._id}`, {
+      name: document.querySelector('input[name="name"]').value,
+      phone: document.querySelector('input[name="phone"]').value,
+      email: document.querySelector('input[name="email"]').value
+    });
   };
 
   // to render user's book cards on load

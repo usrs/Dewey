@@ -10,6 +10,9 @@ const Book = new Schema({
    type: Boolean,
   default: false
   },
+  name: String,
+  email: String,
+  phone: String,
  bookId: String
 })
 

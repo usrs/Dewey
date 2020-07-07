@@ -46,7 +46,10 @@ router.delete('/bookshelf/:id', passport.authenticate('jwt'), (req, res) => {
 //  POST a book loan
 router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
   Book.findByIdAndUpdate(req.params.id, {
-    isLoaned: req.body.loan,
+    name: req.body.name,
+    phone: req.body.phone,
+    email: req.body.email,
+    isLoaned: true,
     // add name, phone, email to book
     // when it's no longer loaned, remove name, phone, email
     // $unset removes values from a document item
