@@ -29,10 +29,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     textSize: "",
     color: "black",
-    marginLeft: theme.spacing(1),
   },
   input: {
-    marginLeft: theme.spacing(11),
     marginTop: theme.spacing(1),
     background: "white",
     borderColor: "#E44D2E",
@@ -40,13 +38,11 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(19),
     color: "#E44D2E"
   },
   login: {
     color: "white",
     marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(11)
   },
 }))
 
@@ -65,49 +61,48 @@ const LoginForm = () => {
     <div>
       <Avatar alt="Dewey" src={Logo} className={classes.large} />
       <h3 className={classes.text}>Login</h3>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-      <TextField
-        required
-        className={classes.input}
-        id="outlined-required"
-        label="username"
-        name="username"
-        variant="outlined"
-        value={username}
-        onChange={handleInputLoginChange}
-      />
+      <Grid 
+        container
+        direction="column"
+        justify="center"
+        alignItems="center">
+          <TextField
+            required
+            className={classes.input}
+            id="outlined-required"
+            label="username"
+            name="username"
+            variant="outlined"
+            value={username}
+            onChange={handleInputLoginChange}
+          />
+          <TextField
+            required
+            className={classes.input}
+            id="outlined-required"
+            label="password"
+            name="password"
+            variant="outlined"
+            type="password"
+            value={password}
+            onChange={handleInputLoginChange}
+          />
+          <Button
+            variant="contained"
+            label="signInBtn"
+            // color="primary"
+            href="#outlined-buttons"
+            className={classes.button}
+            onClick={handleLoginSubmit}>
+            Login
+          </Button>
+          <Button
+            className={classes.login}
+            onClick={handleSignUpDivert}>
+            Not yet a user? Sign up
+          </Button>
       </Grid>
-      <Grid item xs={12}>
-        <TextField
-          required
-          className={classes.input}
-          id="outlined-required"
-          label="password"
-          name="password"
-          variant="outlined"
-          type="password"
-          value={password}
-          onChange={handleInputLoginChange}
-        />
-        <Button
-          variant="contained"
-          label="signInBtn"
-          // color="primary"
-          href="#outlined-buttons"
-          className={classes.button}
-          onClick={handleLoginSubmit}>
-          Login
-        </Button>
-        </Grid>
-      </Grid>
-      <Button
-        className={classes.login}
-        onClick={handleSignUpDivert}>
-        Not yet a user? Sign up
-      </Button>
     </div>
-    
   )
 }
 

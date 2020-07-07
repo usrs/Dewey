@@ -2,14 +2,20 @@ const router = require('express').Router()
 const { User } = require('../models')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
+const { body, validationResult } = require('express-validator')
 
 // Register Route
-router.post('/users/register', (req, res) => {
- const { name, email, username } = req.body
- User.register(new User({ name, email, username }), req.body.password, err => {
-  if (err) { console.error(err) }
-  res.sendStatus(200)
- })
+router.post('/users/register', [body('email').isEmail(), body('password').isLength({ min: 6 })], (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(422)
+            .json({ errors: errors.array() })
+    }
+    const { name, email, username } = req.body
+    User.register(new User({ name, email, username }), req.body.password, err => {
+        if (err) { console.error(err) }
+        res.sendStatus(200)
+    })
 })
 
 // Login Route

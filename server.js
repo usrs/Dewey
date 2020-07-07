@@ -8,7 +8,8 @@ const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt')
 const app = express()
 const { User } = require('./models')
 
-app.use(express.static(join(__dirname, 'public')))
+// switched public to client and added build (for deployment)
+app.use(express.static(join(__dirname, 'client', 'build')))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
@@ -28,6 +29,11 @@ passport.use(new JWTStrategy({
     .catch(err => cb(err))))
 
 app.use(require('./routes'))
+
+// extra route to re-route to homepage **helps with deployment, so routes don't break
+app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
+})
 
 require('mongoose').connect(process.env.MONGODB_URI || process.env.LOCAL_URI, {
     useNewUrlParser: true,

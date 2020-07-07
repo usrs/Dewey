@@ -10,19 +10,20 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles'
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
+  // root: {
+  //   flexGrow: 1,
+  // },
   paper: {
     padding: theme.spacing(2),
     // margin: '20px',
     maxWidth: 500,
   },
   image: {
-    marginRight: '25px',
+    // marginRight: '25px',
     display: 'inline-block',
     maxWidth: '75%',
     maxHeight: '75%',
@@ -33,10 +34,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: '25px',
   },
-  typograph: {
-    marginLeft: '20px',
-  },
 }))
+
+// makes typography mobile responsive
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 
 const BookCard = () => {
 
@@ -51,25 +53,39 @@ const BookCard = () => {
   } = useContext(BookContext)
 
   return (
+    <>
+    <ThemeProvider theme={theme}>
     <div>
       {
         books.map(book => (
           <div key={book.isbn[0]} className={classes.root}>
-            <Container component="main" maxWidth="s" className={classes.contains}>
+            <Container 
+              component="main" 
+              maxWidth="s" 
+              className={classes.contains}>
               <CssBaseline />
               <Paper className={classes.paper}>
                 <Grid container spacing={12}>
-                  <Grid item xs={6}>
+                  <Grid 
+                    direction="row"
+                    justify="space-around"
+                    alignItems="flex-start"
+                    item xs={6}>
                     <CardMedia> 
                       <img
                         className={classes.image}
-                        src="http://covers.openlibrary.org/b/isbn/9781593275846.jpg"
+                        src="./books_image_1.jpg"
                         alt="book cover" />
                       </CardMedia>
                   </Grid>
                   <Grid item xs={6} sm container>
                   <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs>
+                      <Grid 
+                      item xs container 
+                      direction="column" 
+                      justify="flex-start"
+                      alignItems="flex-start"
+                      spacing={2}>
                       <Typography className={classes.typograph} gutterBottom variant="h5">
                         {book.title}
                       </Typography>
@@ -77,19 +93,19 @@ const BookCard = () => {
                         {book.isbn[0]}
                       </Typography>
                       <Typography className={classes.typograph} variant="body2" gutterBottom>
-                        {book.author_name[0]}
+                        Author: {book.author_name[0]}
                       </Typography>
                       <Typography className={classes.typograph} variant="body2" color="textSecondary">
                         {book.fist_publish_year}
                       </Typography>
                       <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                        {book.publisher[0]}
+                        Publisher: {book.publisher[0]}
                       </Typography>
                     </Grid>
                     <Grid item>
                       <CardActions>
                         <Button
-                          size='small'
+                          size='xs'
                           onClick={() => handleBookSave(book)}>
                             Add to library
                         </Button>
@@ -104,6 +120,8 @@ const BookCard = () => {
         ))
       }
     </div>
+    </ThemeProvider>
+    </>
   )
 }
 

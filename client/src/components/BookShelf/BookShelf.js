@@ -12,6 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { Modal } from "@material-ui/core";
+import { render } from "react-dom";
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    // margin: '20px',
     maxWidth: 500,
   },
   modalPaper: {
@@ -33,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
   image: {
     marginRight: "25px",
     display: "inline-block",
-    maxWidth: "75%",
-    maxHeight: "75%",
+    maxWidth: "90%",
+    maxHeight: "90%",
   },
   contains: {
     display: "flex",
@@ -42,18 +43,19 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: "25px",
   },
-  typograph: {
-    marginLeft: "20px",
-  },
 }));
+
+// makes typography mobile responsive
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50 + rand()
+  const left = 50 + rand()
 
   return {
     top: `${top}%`,
@@ -67,29 +69,25 @@ const BookShelf = () => {
 
   const [bookShelfState, setBookShelfState] = useState({
     books: [],
-  });
+    loaned: [],
+  })
 
-  const [isOpen, setOpenStatus] = useState(false);
-  const [modalStyle] = React.useState(getModalStyle);
-
-  const handleBookLoan = (book) => {
-    // make the axios post request here
-    /*make isLoaned true
-     */
-    axios.post(`/api/bookshelf/loan/${book._id}`, {
-      name: document.querySelector('input[name="name"]').value,
-      phone: document.querySelector('input[name="phone"]').value,
-      email: document.querySelector('input[name="email"]').value
-    }, {
+  bookShelfState.handleDeleteBook = book => {
+    // console.log(book)
+    axios.delete(`/api/bookshelf/${book._id}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("id")}`,
-      }
+        'Authorization': `Bearer ${localStorage.getItem('id')}`
+      },
     })
-    .then()
-    .catch((err) => console.error(err))
+      .then(() => {
+        const books = JSON.parse(JSON.stringify(bookShelfState.books))
+        const booksFiltered = books.filter(boock => boock._id !== book._id)
+        setBookShelfState({ ...bookShelfState, books: booksFiltered })
+      })
+      .catch(err => console.error(err))
   }
 
-  // to render user's book cards on load
+  //working useEffect
   useEffect(() => {
     axios
       .get("/api/bookshelf", {
@@ -104,26 +102,116 @@ const BookShelf = () => {
       .catch((err) => console.error(err))
   }, [])
 
+  //to render user's SAVED book cards on load
+  // useEffect(() => {
+  //   axios.get("/api/bookshelf", {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("id")}`,
+  //       },
+  //     })
+  //     .then(({ data }) => {
+  //       data.forEach(books => {
+  //         if (books.isLoaned === false) {
+  //           setBookShelfState({ ...bookShelfState, books: data.books })
+  //         } else {
+  //           setBookShelfState({ ...bookShelfState, loaned: data.books })
+  //         }
+  //       })
+  //       console.log(bookShelfState.books)
+  //       console.log(bookShelfState.loaned)
+  //     })
+  //     .catch((err) => console.error(err))
+  // }, [])
+  
+
+  // //to render user's LOANED books
+  // useEffect(() => {
+  //   axios.get('/api/bookshelf', {
+  //     headers: {
+  //       'Authorization': `Bearer ${localStorage.getItem('id')}`
+  //     }
+  //   })
+  //     .then((data) => {
+  //       console.log(data)
+  //       setBookShelfState({ ...bookShelfState, books: data.books })
+  //       console.log(bookShelfState.books)
+  //       // remove book after saved
+  //       //boock is intentional, feel free to ask Erika about it.
+  //       // const books = bookShelfState.books
+  //       // const loanBooksFiltered = books.filter(loans => loans.isLoaned === true)
+  //       // setBookShelfState({ ...bookShelfState, loaned: loanBooksFiltered })
+  //     })
+  //     .catch(err => console.error(err))
+  // }, [])
+
+  const [isOpen, setOpenStatus] = useState(false);
+  const [modalStyle] = React.useState(getModalStyle)
+
+  const handleBookLoan = (book) => {
+    axios.post(`/api/bookshelf/loan/${book._id}`, {
+      name: document.querySelector('input[name="name"]').value,
+      phone: document.querySelector('input[name="phone"]').value,
+      email: document.querySelector('input[name="email"]').value
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("id")}`,
+      }
+    })
+    .then(() => {
+    
+    })
+    .catch((err) => console.error(err))
+  }
+
+  // bookShelfState.updateLoanShelf = (book) =>{
+  //   axios.put(`/api/bookshelf/loan/${book._id}`, {
+  //     // setting is loaned to opposite of current value
+  //     book.isLoaned= !isLoaned,
+  //     name: document.querySelector('input[name="name"]').value,
+  //     phone: document.querySelector('input[name="phone"]').value,
+  //     email: document.querySelector('input[name="email"]').value
+  //   })
+  //   .then(() =>{
+  //     // update item with id and change to have new is loaned value
+
+  //     // local copy of array
+  //     const loaned = JSON.parse(JSON.stringify(loanBookState.loaned))
+  //     loaned.forEach(loan => {
+  //       if(loan._id === id ) {
+  //         book.isLoaned = !isLoaned
+  //       }
+  //     })
+  //     setbookShelfState({ ...bookShelfState, books })
+  //   })
+  //   .catch(err => console.error(err))
+  // }
+
   return (
+    <>
+    <ThemeProvider theme={theme}>
     <div>
-      {bookShelfState.books.map((book) => {
+      {
+      bookShelfState.books.map((book) => {
         console.log(book);
         return (
           <div key={book.bookId} className={classes.root}>
             <Container
               component="main"
               maxWidth="s"
-              className={classes.contains}
-            >
+              className={classes.contains}>
               <CssBaseline />
               <Paper className={classes.paper}>
                 <Grid container spacing={12}>
-                  <Grid item xs={6}>
+                  <Grid
+                    direction="row"
+                    justify="space-around"
+                    alignItems="flex-start"
+                    item xs={6}>
                     <CardMedia>
                       <img
                         className={classes.image}
-                        src="http://covers.openlibrary.org/b/isbn/9781593275846.jpg"
-                        alt="book cover"
+                        src="./books_image_2.jpg"
+                        alt="book shelf"
                       />
                     </CardMedia>
                   </Grid>
@@ -133,42 +221,43 @@ const BookShelf = () => {
                         <Typography
                           className={classes.typograph}
                           gutterBottom
-                          variant="h5"
+                          variant="h6"
                         >
                           {book.title}
                         </Typography>
                         <Typography
                           className={classes.typograph}
                           gutterBottom
-                          variant="h6"
+                          variant="h7"
                         >
-                          {book.isbn}
-                        </Typography>
-                        <Typography
-                          className={classes.typograph}
-                          variant="body2"
-                          gutterBottom
-                        >
-                          {book.author}
+                          ISBN: {book.isbn}
                         </Typography>
                         <Typography
                           className={classes.typograph}
                           variant="body2"
                           color="textSecondary"
-                        >
-                          {book.publishDate}
+                          >
+                          Author: {book.author}
                         </Typography>
                         <Typography
                           className={classes.typograph}
                           variant="body2"
-                          color="textSecondary"
-                        >
-                          {book.publisher}
+                          color="textSecondary">
+                          Published: {book.publishDate}
+                        </Typography>
+                        <Typography
+                          className={classes.typograph}
+                          variant="body2"
+                          color="textSecondary">
+                          Publisher: {book.publisher}
                         </Typography>
                       </Grid>
                       <Grid item>
                         <CardActions>
-                          <Button size="small" color="danger">
+                          <Button 
+                          size="small" 
+                          color="danger"
+                          onClick={() => bookShelfState.handleDeleteBook(book)}>
                             Remove from Library
                           </Button>
                           <Button
@@ -219,6 +308,8 @@ const BookShelf = () => {
         );
       })}
     </div>
+  </ThemeProvider>
+  </>
   );
 };
 

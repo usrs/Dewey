@@ -42,8 +42,7 @@ const App = () => {
   }
 
   // function to send user signUp data to db
-  signUpState.handleSignUpSubmit = event => {
-    event.preventDefault()
+  signUpState.handleSignUpSubmit = () => {
     axios.post('/api/users/register', signUpState)
       .then(({ data }) => {
         console.log(data)
@@ -130,18 +129,6 @@ const App = () => {
       .catch(err => console.error(err))
   }
 
-  // function to get cover image
-  bookState.handleBookImage = event => {
-    event.preventDefault()
-
-    axios.get(`/api/books/${bookState.search}`)
-      .then(({ data }) => {
-          //can't set to bookState because will replace info above
-          //route works in postman
-      })
-      .catch (err => console.error(err))
-  }
-
   //function to save book
   bookState.handleBookSave = book => {
     // console log data when button clicked
@@ -178,7 +165,7 @@ const App = () => {
     axios.delete(`/api/bookshelf/${book._id}`)
       .then(() => {
         // remove it from frontend array
-        // create local version on book
+        // create local version of book
         const books = JSON.parse(JSON.stringify(bookState.books))
         const booksFiltered = books.filter(boock => boock._id !== book._id)
         setBookState({ ...bookState, books: booksFiltered })
@@ -186,19 +173,6 @@ const App = () => {
       .catch (err => console.error(err))
   }
 
-
-
-  // function to get cover image
-  // bookState.handleBookImage = event => {
-  //   event.preventDefault()
-
-  //   axios.get(`/api/books/${bookState.search}`)
-  //     .then(({ data }) => {
-            // can't set to bookState because will replace info above
-  //     })
-  //     catch (err => console.error(err))
-  // }
-  
   return(
     <Router>
       <div>
@@ -231,13 +205,7 @@ const App = () => {
         <Footer />
       </div>
     </Router>
-    // <>
-    // <Login />
-    // <div>
-    //   hello world
-    // </div>
-    // </Router>
-  );
+  )
 }
 
 export default App

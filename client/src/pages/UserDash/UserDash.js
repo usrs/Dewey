@@ -1,5 +1,6 @@
 import React from 'react'
 import BookShelf from '../../components/BookShelf'
+import LoanBook from '../../components/LoanBook'
 import './app.css'
 import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -17,7 +18,11 @@ const useStyles = makeStyles((theme) => ({
   },
   border: {
     marginTop: '15px',
-  }
+  },
+  shelf: {
+    marginLeft: '10px',
+    marginRight: '10px',
+  },
 }))
 
 const UserDash = () => {
@@ -27,16 +32,16 @@ const UserDash = () => {
   return (
     <div className={classes.root}>
       <Grid className={classes.border} container spacing={3}>
-        <Grid item xs={6}>
+        <Grid item xs className={classes.shelf}>
           <Paper className={classes.paper}>
-            <h1>UNSERNAME Bookshelf</h1>
-            <BookShelf />
+            <h5>Loaned Books</h5>
+            <LoanBook />
           </Paper>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs className={classes.shelf}>
           <Paper className={classes.paper}>
-            <h1>loaned bookshelf</h1>
-            {/* <loanshelf /> */}
+            <h5>Your Library</h5>
+            <BookShelf />
           </Paper>
         </Grid>
       </Grid>
