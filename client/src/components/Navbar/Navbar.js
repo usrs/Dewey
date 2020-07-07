@@ -102,7 +102,16 @@ function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem to='/dashboard' onClick={handleClose}>Profile</MenuItem>
+                <Link to='/Homepage'>
+                  <MenuItem onClick={handleClose}>
+                    Home
+                  </MenuItem>
+                </Link>
+                <Link to='/UserDash'>
+                  <MenuItem onClick={handleClose}>
+                    Profile
+                  </MenuItem>
+                </Link>
                 <MenuItem onClick={handleLogoutSubmit}>Log Out</MenuItem>
               </Menu>
             </div>

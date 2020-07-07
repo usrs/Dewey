@@ -199,13 +199,13 @@ const App = () => {
               <Login />
             </LoginContext.Provider>
           </Route>
-          <Route path="/Homepage">
+          <Route exact path="/Homepage">
             <Navbar />
             <BookContext.Provider value={bookState}>
               <Homepage />
             </BookContext.Provider>
           </Route>
-          <Route path="/UserDash">
+          <Route exact path="/UserDash">
             <Navbar />
             <UserDash />
           </Route>
