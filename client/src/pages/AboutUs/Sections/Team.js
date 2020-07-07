@@ -12,14 +12,15 @@ import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
+import CardFooter from "/components/Card/CardFooter.js";
 
-import styles from "src/assets/jss/landingPageSections/teamStyle.js";
+import styles from "assests/jss/AboutUsStyles/index.js"
 
-import Nathan from "src/assets/teamMembers/Nathan.jpg";
-import Erika from "src/assets/teamMembers/Erika.jpg";
-import Michael from "src/assets/teamMembers/Michael.jpg";
-import Jonathan from "src/assets/teamMembers/Jonathan.jpg";
+
+import Nathan from "assests/teamMembers/Nathan.jpg";
+import Erika from "assests/teamMembers/Erika.jpg";
+import Michael from "assests/teamMembers/Michael.jpg";
+import Jonathan from "assests/teamMembers/Jonathan.jpg";
 //import Tree's
 
 const useStyles = makeStyles(styles);

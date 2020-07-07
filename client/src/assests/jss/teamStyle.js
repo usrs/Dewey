@@ -1,5 +1,5 @@
-import { cardTitle, title } from "assets/jss/material-kit-react.js";
-import imagesStyle from "assets/jss/imagesStyles.js";
+import { cardTitle, title } from "assests/jss/material-kit-react.js";
+import imagesStyle from "assests/jss/imagesStyles.js";
 
 const teamStyle = {
   section: {
