@@ -60,7 +60,7 @@ const BookCard = () => {
                     <CardMedia> 
                       <img
                         className={classes.image}
-                        src="http://covers.openlibrary.org/b/isbn/9781593275846.jpg"
+                        src="./books_image_1.jpg"
                         alt="book cover" />
                       </CardMedia>
                   </Grid>

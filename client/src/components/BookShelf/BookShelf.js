@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { Modal } from "@material-ui/core";
 import { render } from "react-dom";
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    // margin: '20px',
     maxWidth: 500,
   },
   modalPaper: {
@@ -43,10 +43,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: "25px",
   },
-  typograph: {
-    marginLeft: "20px",
-  },
 }));
+
+// makes typography mobile responsive
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -72,6 +73,7 @@ const BookShelf = () => {
   
   const [loanBookState, setLoanBookState] = useState({
     loaned: [],
+    isLoaned: false,
   })
 
   bookShelfState.handleDeleteBook = book => {
@@ -91,21 +93,17 @@ const BookShelf = () => {
 
   // to render user's SAVED book cards on load
   useEffect(() => {
-    axios
-      .get("/api/bookshelf", {
+    axios.get("/api/bookshelf", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("id")}`,
         },
       })
       .then(({ data }) => {
-        console.log(data)
+        // console.log(data)
         setBookShelfState({ ...bookShelfState, books: data.books })
       })
       .catch((err) => console.error(err))
   }, [])
-
-
-
 
   // to render user's LOANED books
   useEffect(() => {
@@ -120,7 +118,7 @@ const BookShelf = () => {
         const loaned = loanBookState.loaned
         const loanBooksFiltered = loaned.filter(loans => loans.isLoaned === true)
         setLoanBookState({ ...loanBookState, loaned: loanBooksFiltered })
-        console.log(loaned)
+        // console.log(loaned)
       })
       .catch(err => console.error(err))
   }, [])
@@ -139,17 +137,15 @@ const BookShelf = () => {
       }
     })
     .then(() => {
-      render(
-   
-      )
+    
     })
     .catch((err) => console.error(err))
   }
 
   return (
     <>
-      <div>
-        <h5>Loaned Books</h5>'
+    <ThemeProvider theme={theme}>
+      {/* <div>
         {
           loanBookState.loaned.map(loan => {
             console.log(loan)
@@ -205,9 +201,8 @@ const BookShelf = () => {
             )
           })
         }
-      </div>
+      </div> */}
     <div>
-      <h5>Your Library</h5>
       {
       bookShelfState.books.map((book) => {
         console.log(book);
@@ -221,12 +216,16 @@ const BookShelf = () => {
               <CssBaseline />
               <Paper className={classes.paper}>
                 <Grid container spacing={12}>
-                  <Grid item xs={6}>
+                  <Grid
+                    direction="row"
+                    justify="space-around"
+                    alignItems="flex-start"
+                    item xs={6}>
                     <CardMedia>
                       <img
                         className={classes.image}
-                        src="http://covers.openlibrary.org/b/isbn/9781593275846.jpg"
-                        alt="book cover"
+                        src="./books_image_2.jpg"
+                        alt="book shelf"
                       />
                     </CardMedia>
                   </Grid>
@@ -236,14 +235,14 @@ const BookShelf = () => {
                         <Typography
                           className={classes.typograph}
                           gutterBottom
-                          variant="h5"
+                          variant="h6"
                         >
                           {book.title}
                         </Typography>
                         <Typography
                           className={classes.typograph}
                           gutterBottom
-                          variant="h6"
+                          variant="h7"
                         >
                           {book.isbn}
                         </Typography>
@@ -268,8 +267,8 @@ const BookShelf = () => {
                         >
                           {book.publisher}
                         </Typography>
-                      </Grid>
-                      <Grid item>
+                      {/* </Grid>
+                      <Grid item> */}
                         <CardActions>
                           <Button 
                           size="small" 
@@ -325,7 +324,8 @@ const BookShelf = () => {
         );
       })}
     </div>
-    </>
+  </ThemeProvider>
+  </>
   );
 };
 
