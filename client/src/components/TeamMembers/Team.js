@@ -47,7 +47,7 @@ export default function TeamSection() {
               </h4>
               <CardBody>
                 <p className={classes.description}>
-                  Discription for Nathan
+                  Description for Nathan
                 </p>
               </CardBody>
               {/*
@@ -78,13 +78,7 @@ export default function TeamSection() {
               <CardBody>
                 <p className={classes.description}>
                 I am a Wardrobe Stylist and an image consultant with 10+ years of industry experience.
-                I offer creative solutions with critical analysis to bring brand awareness through strong visuals and styling.
-                I bring a self-motivated work ethic and a positive attitude to team projects. I am always ready for the next new challenge!
-
-                Working as a freelance creative, I often have a vision that I am eager to execute.
-                When creating a look or collaborating with production to build a story;
-                I have the knowledge and tools it takes to turn the vision into a reality.
-                I am looking to expand that knowledge into technology, in particular website development.
+                I offer creative solutions with critical analysis to bring brand awareness through strong visuals and styling. Working as a freelance creative, I often have a vision that I am eager to execute. When creating a look or collaborating with production to build a story; I have the knowledge and tools it takes to turn the vision into a reality. I am looking to expand that knowledge into technology, in particular website development.
                 </p>
               </CardBody>
               {/*
