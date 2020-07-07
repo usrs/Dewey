@@ -43,6 +43,14 @@ router.delete('/bookshelf/:id', passport.authenticate('jwt'), (req, res) => {
     .catch(err => console.error(err))
 })
 
+router.get('/bookshelf/loan', passport.authenticate('jwt'), (req, res) => {
+  User.findById(req.user._id)
+    //needs to populate whole card, come back to this...
+    .populate('books')
+    .then(books => res.json(books))
+    .catch(err => console.error(err))
+})
+
 //  POST a book loan
 router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
   Book.findByIdAndUpdate(req.params.id, {

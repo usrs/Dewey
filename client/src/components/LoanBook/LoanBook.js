@@ -48,7 +48,7 @@ const LoanBook = () => {
 
   // to render user's book cards on load
   useEffect(() => {
-    axios.get('/api/bookshelf', {
+    axios.get('/api/bookshelf/loan', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('id')}`
       }
@@ -102,14 +102,9 @@ const LoanBook = () => {
                           <CardActions>
                             <Button
                               size='small'
-                              color='danger'>
-                              Remove from Library
-                          </Button>
-                            <Button
-                              size='small'
                               onClick={console.log('update me')}
                             >
-                              Loan
+                              Return
                         </Button>
                           </CardActions>
                         </Grid>

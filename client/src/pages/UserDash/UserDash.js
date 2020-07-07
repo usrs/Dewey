@@ -1,5 +1,6 @@
 import React from 'react'
 import BookShelf from '../../components/BookShelf'
+import LoanBook from '../../components/LoanBook'
 import './app.css'
 import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -29,14 +30,14 @@ const UserDash = () => {
       <Grid className={classes.border} container spacing={3}>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            <h1>UNSERNAME Bookshelf</h1>
+            <h1>Your Bookshelf</h1>
             <BookShelf />
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className={classes.paper}>
-            <h1>loaned bookshelf</h1>
-            {/* <loanshelf /> */}
+            <h1>Loaned List</h1>
+            <LoanBook />
           </Paper>
         </Grid>
       </Grid>
