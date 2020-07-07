@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
   image: {
     marginRight: "25px",
     display: "inline-block",
-    maxWidth: "75%",
-    maxHeight: "75%",
+    maxWidth: "90%",
+    maxHeight: "90%",
   },
   contains: {
     display: "flex",
@@ -211,8 +211,7 @@ const BookShelf = () => {
             <Container
               component="main"
               maxWidth="s"
-              className={classes.contains}
-            >
+              className={classes.contains}>
               <CssBaseline />
               <Paper className={classes.paper}>
                 <Grid container spacing={12}>
