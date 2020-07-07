@@ -52,8 +52,8 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50 + rand()
+  const left = 50 + rand()
 
   return {
     top: `${top}%`,
@@ -70,7 +70,7 @@ const BookShelf = () => {
   });
 
   const [isOpen, setOpenStatus] = useState(false);
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = React.useState(getModalStyle)
 
   const handleBookLoan = (book) => {
     // make the axios post request here
