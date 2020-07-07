@@ -10,7 +10,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import { Collapse, Navbar, NavbarToggler, Alert } from 'reactstrap'
+import { Collapse, Alert } from 'reactstrap'
 import SignUpContext from '../../utils/SignUpContext'
 import Logo from '../../Logo/deweyWhite.png'
 
@@ -219,8 +219,7 @@ const SignUpForm = props => {
                         // color="primary"
                         href="#outlined-buttons"
                         onClick={
-                           handleSignUpSubmit,
-                           toggleNavbar
+                           handleSignUpSubmit
                             }>
                         join dewey
                     </Button>
