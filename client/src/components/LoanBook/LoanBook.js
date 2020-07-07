@@ -65,7 +65,74 @@ const LoanBook = () => {
 
   return (
     <div>
-      {
+      <div className={classes.root}>
+        <Container
+          component="main"
+          maxWidth="s"
+          className={classes.contains}>
+          <CssBaseline />
+          <Paper className={classes.paper}>
+            <Grid container spacing={12}>
+              <Grid
+                direction="row"
+                justify="space-around"
+                alignItems="flex-start"
+                item xs={6}>
+                <CardMedia>
+                  <img
+                    className={classes.image}
+                    src="./books_image_2.jpg"
+                    alt="book shelf" />
+                </CardMedia>
+              </Grid>
+              <Grid item xs={6} sm container>
+                <Grid
+                  item xs container direction="column" spacing={2}>
+                  <Grid item xs>
+                    <Typography
+                      className={classes.typograph}
+                      gutterBottom
+                      variant="h6">
+                      Great Expectations
+                    </Typography>
+                    <Typography
+                      className={classes.typograph}
+                      gutterBottom
+                      variant="h7">
+                      ISBN: 9781455122905
+                    </Typography>
+                    <Typography className={classes.typograph}   variant="body2"
+                      color="textSecondary">
+                      Author: Charles Dickens
+                    </Typography>
+                    <Typography className={classes.typograph} variant="body2" color="textSecondary">
+                      Published: 1800
+                    </Typography>
+                    <Typography className={classes.typograph} variant="body2" color="textSecondary">
+                      Publisher: Chapman & Hall
+                    </Typography>
+                  </Grid>
+                  <Grid 
+                    item
+                    direction="row"
+                    justify="center"
+                    alignItems="center">
+                    <CardActions>
+                      <Button
+                        size='small'
+                        onClick={console.log('update me')}
+                      >
+                        Return
+                            </Button>
+                    </CardActions>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Container>
+      </div>
+      {/* {
         loanBookState.books.map(book => {
           console.log(book)
           return (
@@ -134,7 +201,7 @@ const LoanBook = () => {
             </div>
           )
         })
-      }
+      } */}
     </div>
   )
 
