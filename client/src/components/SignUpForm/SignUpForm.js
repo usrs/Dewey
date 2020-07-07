@@ -10,7 +10,7 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import { Collapse, Alert } from 'reactstrap'
+import { Collapse, Navbar, NavbarToggler, Alert } from 'reactstrap'
 import SignUpContext from '../../utils/SignUpContext'
 import Logo from '../../Logo/deweyWhite.png'
 
@@ -31,16 +31,14 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
     },
     input: {
-        marginLeft: theme.spacing(11),
         marginTop: theme.spacing(1),
         background: "white",
-        // border: "1px",
         borderColor: "E44D2E",
         borderRadius: "5px"
     },
     button: {
         marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(17),
+        // marginLeft: theme.spacing(17),
         color: "#E44D2E"
     },
     text: {
@@ -63,12 +61,12 @@ const useStyles = makeStyles((theme) => ({
     login: {
         color: "white",
         marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(13)
+        // marginLeft: theme.spacing(13)
     },
     what: {
         color: "white",
         marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(15)
+        // marginLeft: theme.spacing(15)
     },
     closeButton: {
         position: 'absolute',
@@ -78,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     },
     alert: {
         marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(10)
+        // marginLeft: theme.spacing(10)
     },
     alertText: {
         color: "#E44D2E"
@@ -87,6 +85,11 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "bold",
         color: "#E44D2E",
         textDecoration: "underline"
+    },
+    pw: {
+        color:"white",
+        textAlign: "center",
+        fontSize: "11px"
     }
 }))
 
@@ -149,11 +152,13 @@ const SignUpForm = props => {
         const handleClose = () => {
             setOpen(false)
         }
-        
 
     const [collapsed, setCollapsed] = useState(true);
-    const toggleNavbar = () => setCollapsed(!collapsed);
-
+    const toggleAlert = event => {
+        event.preventDefault()
+        setCollapsed(!collapsed)
+        handleSignUpSubmit()
+    }
     return (
 
         <>
@@ -161,8 +166,12 @@ const SignUpForm = props => {
             <Avatar alt="Dewey" src={Logo} className={classes.large} />
             {/* <h1 className={classes.text}>Dewey</h1> */}
             <h3 className={classes.text}>Sign Up</h3>
-            <Grid container spacing={3}>
-                <Grid  item xs={12}>
+            <Grid 
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center">
+                <Grid>
                     <TextField
                         className={classes.input}
                         required
@@ -174,7 +183,7 @@ const SignUpForm = props => {
                         onChange={handleInputSignUpChange}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid>
                     <TextField
                         required
                         className={classes.input}
@@ -186,7 +195,7 @@ const SignUpForm = props => {
                         onChange={handleInputSignUpChange}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid>
                     <TextField
                         required
                         className={classes.input}
@@ -198,7 +207,7 @@ const SignUpForm = props => {
                         onChange={handleInputSignUpChange}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid>
                     <TextField
                         required
                         className={classes.input}
@@ -210,17 +219,21 @@ const SignUpForm = props => {
                         value={password}
                         onChange={handleInputSignUpChange}
                     />
+                    <p className={classes.pw}>at least 6 characters</p>
                     </Grid>
-                    <Grid>
+                    <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                    >
                     <Button
                         className={classes.button}
                         variant="contained"
                         label="signUpBtn"
                         // color="primary"
                         href="#outlined-buttons"
-                        onClick={
-                           handleSignUpSubmit
-                            }>
+                        onClick={toggleAlert}>
                         join dewey
                     </Button>
                         <Collapse isOpen={!collapsed} className={classes.alert}>
@@ -237,19 +250,25 @@ const SignUpForm = props => {
             </Grid>
         </div>
         <div>
-                <Button className={classes.what} variant="text" color="primary" onClick={handleClickOpen}>
-                    What is dewey?
-                </Button>
-                <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center">
+                    <Button className={classes.what} variant="text" color="primary" onClick={handleClickOpen}>
+                        What is dewey?
+                    </Button>               
+                    <Dialog onClose={handleClose}                 aria-labelledby="customized-dialog-title" open={open}>
                     <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                         What is Dewey?
                     </DialogTitle>
                     <DialogContent dividers>
                         <Typography gutterBottom className={classes.modalTitle}>
                             Dewey is your online personal library. It allows you to keep track of all of your books and is perfect for the reader that has a large collection lining their shelves at home. Simply search for your book by name or ISBN and save it to your digital library! It's that easy.
-                        </Typography>
-                    </DialogContent>
-                </Dialog>
+                        </Typography>                        
+                     </DialogContent>                   
+                </Dialog>                    
+            </Grid>
         </div>
     </>
     )
