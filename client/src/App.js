@@ -11,6 +11,7 @@ import {
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
 import UserDash from './pages/UserDash'
+import AboutUs from './pages/AboutUs'
 import Footer from './components/Footer'
 // bring in contexts
 import BookContext from './utils/BookContext'
@@ -18,7 +19,6 @@ import LoanContext from './utils/LoanContext'
 import LoginContext from './utils/LoginContext'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
-import AboutUs from './pages/AboutUs'
 import SignUpContext from './utils/SignUpContext'
 import BookShelfContext from './utils/BookShelfContext'
 
@@ -195,7 +195,7 @@ const App = () => {
           </Route>
           <Route exact path="/AboutUs">
             <Navbar />
-            <AboutUs />
+            <AboutUs/>
           </Route>
         </Switch>
         <Footer />

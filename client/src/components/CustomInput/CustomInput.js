@@ -9,7 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 
-import styles from "assets/jss/customInputStyle.js";
+import styles from "../../assests/jss/customInputStyle.js";
 
 const useStyles = makeStyles(styles);
 
