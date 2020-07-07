@@ -69,6 +69,36 @@ const BookShelf = () => {
     books: [],
   });
 
+  bookShelfState.handleDeleteBook = book => {
+    // console.log(book)
+    axios.delete(`/api/bookshelf/${book._id}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('id')}`
+      },
+    })
+      .then(() => {
+        const books = JSON.parse(JSON.stringify(bookShelfState.books))
+        const booksFiltered = books.filter(boock => boock._id !== book._id)
+        setBookShelfState({ ...bookShelfState, books: booksFiltered })
+      })
+      .catch(err => console.error(err))
+  }
+
+  // to render user's book cards on load
+  useEffect(() => {
+    axios
+      .get("/api/bookshelf", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("id")}`,
+        },
+      })
+      .then(({ data }) => {
+        console.log(data)
+        setBookShelfState({ ...bookShelfState, books: data.books })
+      })
+      .catch((err) => console.error(err))
+  }, [])
+
   const [isOpen, setOpenStatus] = useState(false);
   const [modalStyle] = React.useState(getModalStyle)
 
@@ -88,21 +118,6 @@ const BookShelf = () => {
     .then()
     .catch((err) => console.error(err))
   }
-
-  // to render user's book cards on load
-  useEffect(() => {
-    axios
-      .get("/api/bookshelf", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("id")}`,
-        },
-      })
-      .then(({ data }) => {
-        console.log(data)
-        setBookShelfState({ ...bookShelfState, books: data.books })
-      })
-      .catch((err) => console.error(err))
-  }, [])
 
   return (
     <div>
@@ -168,7 +183,10 @@ const BookShelf = () => {
                       </Grid>
                       <Grid item>
                         <CardActions>
-                          <Button size="small" color="danger">
+                          <Button 
+                          size="small" 
+                          color="danger"
+                          onClick={() => bookShelfState.handleDeleteBook(book)}>
                             Remove from Library
                           </Button>
                           <Button
