@@ -135,7 +135,8 @@ const App = () => {
 
     axios.get(`/api/books/${bookState.search}`)
       .then(({ data }) => {
-            //can't set to bookState because will replace info above
+          //can't set to bookState because will replace info above
+          //route works in postman
       })
       .catch (err => console.error(err))
   }
