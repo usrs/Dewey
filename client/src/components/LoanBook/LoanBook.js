@@ -48,14 +48,18 @@ const LoanBook = () => {
 
   // to render user's book cards on load
   useEffect(() => {
-    axios.get('/api/bookshelf/loan', {
+    axios.get('/api/bookshelf', {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('id')}`
       }
     })
-      .then(({ data }) => {
-        console.log(data)
-        setLoanBookState({ ...loanBookState, books: data.books })
+      .then(() => {
+        // remove book after saved
+        //boock is intentional, feel free to ask Erika about it.
+        const books = loanBookState.books
+        const loanBooksFiltered = books.filter(boock => boock.isLoaned === true)
+        setLoanBookState({ ...loanBookState, books: loanBooksFiltered })
+        console.log(books)
       })
       .catch(err => console.error(err))
   }, [])
