@@ -7,20 +7,18 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "/components/Card/CardFooter.js";
+import GridContainer from "../Grid/GridContainer.js";
+import GridItem from "../Grid/GridItem.js";
+import Card from "../Card/Card.js";
+import CardBody from "../Card/CardBody.js";
 
-import styles from "assests/jss/AboutUsStyles/index.js"
+import styles from "../../assests/jss/AboutUsStyles/teamStyle.js"
 
 
-import Nathan from "assests/teamMembers/Nathan.jpg";
-import Erika from "assests/teamMembers/Erika.jpg";
-import Michael from "assests/teamMembers/Michael.jpg";
-import Jonathan from "assests/teamMembers/Jonathan.jpg";
+import Nathan from "../../assests/teamMembers/Nathan.jpg";
+import Erika from "../../assests/teamMembers/Erika.jpg";
+import Michael from "../../assests/teamMembers/Michael.jpg";
+import Jonathan from "../../assests/teamMembers/Jonathan.jpg";
 //import Tree's
 
 const useStyles = makeStyles(styles);
