@@ -41,8 +41,7 @@ const App = () => {
   }
 
   // function to send user signUp data to db
-  signUpState.handleSignUpSubmit = event => {
-    event.preventDefault()
+  signUpState.handleSignUpSubmit = () => {
     axios.post('/api/users/register', signUpState)
       .then(({ data }) => {
         console.log(data)
