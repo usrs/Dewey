@@ -16,10 +16,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   submit: {
-    color: '#FFFFFF',
-    backgroundColor: '#E44D2E',
-    outlineColor: '#E44D2E',
-
+    color: '#E44D2E',
+  },
+  input: {
+    marginTop: theme.spacing(3),
+    background: "white",
+    borderColor: "#E44D2E",
+    borderRadius: "5px"
   },
 }))
 
@@ -48,6 +51,7 @@ const SearchForm = () => {
             required
             fullWidth
             name="search"
+            className={classes.input}
             value={search}
             onChange={handleInputBookChange} />
           <Button

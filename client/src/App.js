@@ -8,9 +8,6 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
-// import { render } from 'react-dom'
-// import { useAlert, Provider as AlertProvider } from 'react-alert'
-// import AlertTemplate from 'react-alert-template-basic'
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
 import UserDash from './pages/UserDash'
@@ -22,7 +19,6 @@ import LoginContext from './utils/LoginContext'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import SignUpContext from './utils/SignUpContext'
-import LoginAlert from './components/LoginAlert'
 import BookShelfContext from './utils/BookShelfContext'
 
 const App = () => {
