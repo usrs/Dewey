@@ -25,6 +25,7 @@
   "homepage": "https://github.com/usrs/Dewey#readme",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "concurrently": "^5.2.0",
@@ -38,11 +39,12 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-alert": "^7.0.1",
     "react-alert-template-basic": "^1.0.0",
     "react-dom": "^16.13.1",
-    "reactstrap": "^8.5.1",
-    "rxjs": "^6.6.0"
+    "react-transition-group": "^4.4.1",
+    "reactstrap": "^8.5.1"
   }
 }

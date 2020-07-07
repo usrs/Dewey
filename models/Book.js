@@ -6,6 +6,13 @@ const Book = new Schema({
  author: String,
  publishDate: String,
  publisher: String,
+ isLoaned: {
+   type: Boolean,
+  default: false
+  },
+  name: String,
+  email: String,
+  phone: String,
  bookId: String
 })
 

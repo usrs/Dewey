@@ -1,4 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import UserDash from '../../pages/UserDash'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link
+} from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -23,7 +31,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+
+
 function Navbar() {
+
   const classes = useStyles()
   const [auth, /*setAuth*/] = React.useState(true)
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -39,6 +50,12 @@ function Navbar() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleLogoutSubmit = event => {
+    console.log('ping!')
+    localStorage.removeItem('id')
+    window.location = '/Login'
   }
 
   return (
@@ -67,7 +84,7 @@ function Navbar() {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <img src="/Dewey_white_sm.png" alt=""/>
+                <img src="./Dewey_white_sm.png" alt="dewey logo"/>
                 {/* <AccountCircle /> */}
               </IconButton>
               <Menu
@@ -85,8 +102,17 @@ function Navbar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem to='/dashboard' onClick={handleClose}>Profile</MenuItem>
-                <MenuItem to='/' onClick={handleClose}>Log Out</MenuItem>
+                <Link to='/Homepage'>
+                  <MenuItem onClick={handleClose}>
+                    Home
+                  </MenuItem>
+                </Link>
+                <Link to='/UserDash'>
+                  <MenuItem onClick={handleClose}>
+                    Profile
+                  </MenuItem>
+                </Link>
+                <MenuItem onClick={handleLogoutSubmit}>Log Out</MenuItem>
               </Menu>
             </div>
           )}

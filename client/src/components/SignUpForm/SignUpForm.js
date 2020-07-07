@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
+import Alert from '@material-ui/lab/Alert'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { Collapse, Navbar, NavbarToggler, Alert } from 'reactstrap'
@@ -149,6 +150,7 @@ const SignUpForm = props => {
         const handleClose = () => {
             setOpen(false)
         }
+        
 
     const [collapsed, setCollapsed] = useState(true);
     const toggleNavbar = () => setCollapsed(!collapsed);
@@ -239,7 +241,7 @@ const SignUpForm = props => {
         <div>
                 <Button className={classes.what} variant="text" color="primary" onClick={handleClickOpen}>
                     What is dewey?
-      </Button>
+                </Button>
                 <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
                     <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                         What is Dewey?
