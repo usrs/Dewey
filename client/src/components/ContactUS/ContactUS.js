@@ -5,12 +5,12 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import CustomInput from "components/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
+import GridContainer from "../Grid/GridContainer";
+import GridItem from "../Grid/GridItem.js";
+import CustomInput from "../CustomInput/CustomInput.js";
+import Button from "../CustomButtons/Button.js";
 
-import styles from "assets/jss/material-kit-react/views/landingPageSections/workStyle.js";
+import styles from "../../assests/jss/AboutUsStyles/contactStyle"
 
 const useStyles = makeStyles(styles);
 

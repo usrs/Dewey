@@ -37,12 +37,15 @@ const useStyles = makeStyles((theme) =>
     {
       padding: theme.spacing(3, 2),
       marginTop: 'auto',
+      marginLeft: 'auto',
+      marginRight: 'auto',
       backgroundColor: '#E44D2E',
     },
     spacing:
     {
-        color: '#D8CFD1',
         margin: 'auto',
+        backgroundColor: '#00B596',
+        fontColor: '#D8CFD1',
     },
   }
 ));
@@ -61,10 +64,12 @@ const StickyFooter = () => {
               
             <BottomNavigation value={value} onChange={(event, newValue) => {setValue(newValue);}} showLabels className={classes.spacing}>
 
-                <BottomNavigationAction label="Home" href="client\src\pages\Homepage\Homepage.js"/>
-                <BottomNavigationAction label="About Us" href="../pages/Homepage/index.js"/>
-                <BottomNavigationAction label="Contact Us" href="../pages/Homepage/Homepage.js"/>
-
+              <Link to='/Homepage'>
+                <BottomNavigationAction label="Home" href="\Homepage"> Home </BottomNavigationAction>
+              </Link> 
+              <Link to='/AboutUs'>
+                <BottomNavigationAction label="About Us" href="\AboutUs"> About Us</BottomNavigationAction>
+              </Link>
             </BottomNavigation>
             <Copyright />
             </Container>
