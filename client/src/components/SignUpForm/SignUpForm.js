@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
         marginLeft: theme.spacing(10)
     },
-    text: {
+    alertText: {
         color: "#E44D2E"
     },
     link: {
@@ -224,7 +224,7 @@ const SignUpForm = props => {
                         join dewey
                     </Button>
                         <Collapse isOpen={!collapsed} className={classes.alert}>
-                            <Alert color="light" className={classes.text}>
+                            <Alert color="light" className={classes.alertText}>
                                 Success! please login <a href="/Login" className="alert-link" className={classes.link}>here</a>
                             </Alert>
                         </Collapse>
