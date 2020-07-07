@@ -45,17 +45,22 @@ router.delete('/bookshelf/:id', passport.authenticate('jwt'), (req, res) => {
 
 //  POST a book loan
 router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
-  Book.findByIdAndUpdate({
-    isLoaned: req.body.loan
+  Book.findByIdAndUpdate(req.params.id, {
+    isLoaned: req.body.loan,
+    // add name, phone, email to book
+    // when it's no longer loaned, remove name, phone, email
+    // $unset removes values from a document item
   })
-    .then(book => {
+    .then((book) => {
       User.findByIdAndUpdate(req.user._id, { $push: { books: book._id } })
-        .then(() => res.json({
-          isLoaned: book.isLoaned
-        }))
-        .catch(err => console.error(err))
+        .then(() =>
+          res.json({
+            isLoaned: book.isLoaned,
+          })
+        )
+        .catch((err) => res.status(500).send(err))
     })
-    .catch(err => console.error(err))
+    .catch((err) => res.status(500).send(err))
 })
 
   module.exports = router

@@ -166,7 +166,6 @@ const App = () => {
         const booksFiltered = books.filter(boock => boock.id !== book.bookId)
         setBookState({ ...bookState, books: booksFiltered})
         console.log(book)
-        console.log('this is as far as we got')
       })
       .catch(err => console.log(err))
   }
