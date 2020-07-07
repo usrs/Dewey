@@ -10,10 +10,11 @@ const contactStyle = {
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none",
-    textAlign: "center"
+    textAlign: "center",
+    color: "White"
   },
   description: {
-    color: "#999",
+    color: "white",
     textAlign: "center"
   },
   textCenter: {
