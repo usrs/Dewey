@@ -11,19 +11,22 @@ const teamStyle = {
     marginBottom: "1rem",
     marginTop: "30px",
     minHeight: "32px",
-    textDecoration: "none"
+    textDecoration: "none",
+    color: "white"
   },
   ...imagesStyle,
   itemGrid: {
     marginLeft: "auto",
     marginRight: "auto"
   },
-  cardTitle,
+  cardTitle: {
+    color: "white"
+  },
   smallTitle: {
-    color: "#6c757d"
+    color: "white"
   },
   description: {
-    color: "#999"
+    color: "white"
   },
   justifyCenter: {
     justifyContent: "center !important"
@@ -37,7 +40,7 @@ const teamStyle = {
     height: "100%",
     lineHeight: "41px",
     fontSize: "20px",
-    color: "#999"
+    color: "white"
   },
   margin5: {
     margin: "5px"
