@@ -243,31 +243,29 @@ const BookShelf = () => {
                           gutterBottom
                           variant="h7"
                         >
-                          {book.isbn}
-                        </Typography>
-                        <Typography
-                          className={classes.typograph}
-                          variant="body2"
-                          gutterBottom
-                        >
-                          {book.author}
+                          ISBN: {book.isbn}
                         </Typography>
                         <Typography
                           className={classes.typograph}
                           variant="body2"
                           color="textSecondary"
-                        >
-                          {book.publishDate}
+                          >
+                          Author: {book.author}
                         </Typography>
                         <Typography
                           className={classes.typograph}
                           variant="body2"
-                          color="textSecondary"
-                        >
-                          {book.publisher}
+                          color="textSecondary">
+                          Published: {book.publishDate}
                         </Typography>
-                      {/* </Grid>
-                      <Grid item> */}
+                        <Typography
+                          className={classes.typograph}
+                          variant="body2"
+                          color="textSecondary">
+                          Publisher: {book.publisher}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
                         <CardActions>
                           <Button 
                           size="small" 
