@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     // margin: '20px',
-    maxWidth: 500,
+    // maxWidth: 500,
   },
   image: {
     marginRight: '25px',
@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     marginTop: '25px',
-  },
-  typograph: {
-    marginLeft: '20px',
   },
 }))
 
@@ -70,8 +67,8 @@ const LoanBook = () => {
               <Container component="main" maxWidth="s" className={classes.contains}>
                 <CssBaseline />
                 <Paper className={classes.paper}>
-                  <Grid container spacing={12}>
-                    <Grid item xs={6}>
+                  <Grid container spacing={3}>
+                    <Grid item xs>
                       <CardMedia>
                         <img
                           className={classes.image}
@@ -79,7 +76,7 @@ const LoanBook = () => {
                           alt="book cover" />
                       </CardMedia>
                     </Grid>
-                    <Grid item xs={6} sm container>
+                    <Grid item xs sm container>
                       <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                           <Typography className={classes.typograph} gutterBottom variant="h5">
