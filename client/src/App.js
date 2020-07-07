@@ -135,7 +135,8 @@ const App = () => {
 
     axios.get(`/api/books/${bookState.search}`)
       .then(({ data }) => {
-            //can't set to bookState because will replace info above
+          //can't set to bookState because will replace info above
+          //route works in postman
       })
       .catch (err => console.error(err))
   }
@@ -184,6 +185,19 @@ const App = () => {
       .catch (err => console.error(err))
   }
 
+
+
+  // function to get cover image
+  // bookState.handleBookImage = event => {
+  //   event.preventDefault()
+
+  //   axios.get(`/api/books/${bookState.search}`)
+  //     .then(({ data }) => {
+            // can't set to bookState because will replace info above
+  //     })
+  //     catch (err => console.error(err))
+  // }
+  
   return(
     <Router>
       <div>
@@ -198,13 +212,13 @@ const App = () => {
               <Login />
             </LoginContext.Provider>
           </Route>
-          <Route path="/Homepage">
+          <Route exact path="/Homepage">
             <Navbar />
             <BookContext.Provider value={bookState}>
               <Homepage />
             </BookContext.Provider>
           </Route>
-          <Route path="/UserDash">
+          <Route exact path="/UserDash">
             <Navbar />
             <UserDash />
           </Route>
