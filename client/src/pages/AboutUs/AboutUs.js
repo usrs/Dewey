@@ -34,10 +34,8 @@ const AboutUs = () =>
     return
     (
         <div>
-            <Navbar/>
             <Team/>
             <ContactUS/>
-            <Footer/>
         </div>
     );
 }

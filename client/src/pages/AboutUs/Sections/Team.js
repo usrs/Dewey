@@ -19,6 +19,7 @@ import styles from "assets/jss/landingPageSections/teamStyle.js";
 import Nathan from "assets/teamMembers/Nathan.jpg";
 import Erika from "assets/teamMembers/Erika.jpg";
 import Michael from "assets/teamMembers/Michael.jpg";
+import Jonathn from "assets/teamMembers/Jonathan.jpg";
 //import Tree's
 
 const useStyles = makeStyles(styles);
@@ -139,7 +140,7 @@ export default function TeamSection() {
           <GridItem xs={12} sm={12} md={3}>
             <Card plain>
               <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                <img src={Tree} alt="..." className={imageClasses} />
+                <img src={Jonathan} alt="..." className={imageClasses} />
               </GridItem>
               <h4 className={classes.cardTitle}>
                 Jonathan

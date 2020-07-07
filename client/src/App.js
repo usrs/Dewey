@@ -14,6 +14,7 @@ import {
 import Navbar from './components/Navbar'
 import Homepage from './pages/Homepage'
 import UserDash from './pages/UserDash'
+import AboutUs from './pages/AboutUs'
 import Footer from './components/Footer'
 // bring in contexts
 import BookContext from './utils/BookContext'
@@ -221,6 +222,10 @@ const App = () => {
           <Route exact path="/UserDash">
             <Navbar />
             <UserDash />
+          </Route>
+          <Route exact path="/AboutUs">
+            <Navbar />
+            <AboutUs/>
           </Route>
         </Switch>
         <Footer />
