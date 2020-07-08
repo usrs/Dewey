@@ -138,10 +138,7 @@ export default function TeamSection() {
               </h4>
               <CardBody>
                 <p className={classes.description}>
-                  You can write here details about one of your team members. You
-                  can give more details about what they do. Feel free to add
-                  some <a href="#pablo">links</a> for people to be able to
-                  follow them outside the site.
+                  Amateur photographer that does wedding photography as a side job. First encountered coding during middle school, and only recently decided to pickup the passion for coding that sat dormant for years. This coding bootcamp has been challenging, but I look forward to honing my skills as a web developer. 
                 </p>
               </CardBody>
               {/*
