@@ -14,6 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import { Modal } from "@material-ui/core";
 import { render } from "react-dom";
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import { bool } from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,12 +68,9 @@ function getModalStyle() {
 const BookShelf = () => {
   const classes = useStyles();
 
-  const [bookShelfState, setBookShelfState] = useState({
-    books: [],
-    loaned: [],
-  })
+  const [bookShelfState, setBookShelfState] = useState([]);
 
-  bookShelfState.handleDeleteBook = book => {
+  const handleDeleteBook = book => {
     // console.log(book)
     axios.delete(`/api/bookshelf/${book._id}`, {
       headers: {
@@ -82,12 +80,13 @@ const BookShelf = () => {
       .then(() => {
         const books = JSON.parse(JSON.stringify(bookShelfState.books))
         const booksFiltered = books.filter(boock => boock._id !== book._id)
-        setBookShelfState({ ...bookShelfState, books: booksFiltered })
+        // setBookShelfState({ ...bookShelfState, books: booksFiltered })
       })
       .catch(err => console.error(err))
   }
 
   //working useEffect
+  /*
   useEffect(() => {
     axios
       .get("/api/bookshelf", {
@@ -100,30 +99,30 @@ const BookShelf = () => {
         setBookShelfState({ ...bookShelfState, books: data.books })
       })
       .catch((err) => console.error(err))
+  }, [])*/
+
+  // to render user's SAVED book cards on load
+
+
+  useEffect(() => {
+    axios.get("/api/bookshelf", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("id")}`,
+        },
+      })
+      .then(({ data }) => {
+        data.books.forEach(book => {
+          if(!book.isLoaned) {
+            const newBookShelfState = bookShelfState;
+            newBookShelfState.push(book);
+            setBookShelfState([...newBookShelfState ]);
+          }
+        });
+      })
+      .catch((err) => console.error(err))
   }, [])
 
-  //to render user's SAVED book cards on load
-  // useEffect(() => {
-  //   axios.get("/api/bookshelf", {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("id")}`,
-  //       },
-  //     })
-  //     .then(({ data }) => {
-  //       data.forEach(books => {
-  //         if (books.isLoaned === false) {
-  //           setBookShelfState({ ...bookShelfState, books: data.books })
-  //         } else {
-  //           setBookShelfState({ ...bookShelfState, loaned: data.books })
-  //         }
-  //       })
-  //       console.log(bookShelfState.books)
-  //       console.log(bookShelfState.loaned)
-  //     })
-  //     .catch((err) => console.error(err))
-  // }, [])
-  
-
+  console.log(bookShelfState)
   // //to render user's LOANED books
   // useEffect(() => {
   //   axios.get('/api/bookshelf', {
@@ -147,7 +146,25 @@ const BookShelf = () => {
   const [isOpen, setOpenStatus] = useState(false);
   const [modalStyle] = React.useState(getModalStyle)
 
-  const handleBookLoan = (book) => {
+  const handleBookLoan = (event) => {
+    event.preventDefault();
+
+    const { bookId, name, phone, email } = event.target;
+
+    axios.post(`/api/bookshelf/loan/${bookId.value}`,
+      {
+        name: name.value,
+        phone: phone.value,
+        email: email.value
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("id")}`,
+        }
+      },
+    ).then(() => window.location.reload()).catch(error => console.log(error))
+
+    /*
     axios.post(`/api/bookshelf/loan/${book._id}`, {
       name: document.querySelector('input[name="name"]').value,
       phone: document.querySelector('input[name="phone"]').value,
@@ -160,7 +177,7 @@ const BookShelf = () => {
     .then(() => {
     
     })
-    .catch((err) => console.error(err))
+    .catch((err) => console.error(err))*/
   }
 
   // bookShelfState.updateLoanShelf = (book) =>{
@@ -191,7 +208,7 @@ const BookShelf = () => {
     <ThemeProvider theme={theme}>
     <div>
       {
-      bookShelfState.books.map((book) => {
+      bookShelfState.map((book) => {
         console.log(book);
         return (
           <div key={book.bookId} className={classes.root}>
@@ -281,17 +298,13 @@ const BookShelf = () => {
                               className={classes.modalPaper}
                             >
                               <h2 id="simple-modal-title">Text in a modal</h2>
-                              <form>
+                              <form onSubmit={handleBookLoan}>
                               {/* Form or Button */}
+                              <input type="hidden" name="bookId" value={book._id} />
                               <input placeholder="Name" type="text" name="name" />
                               <input placeholder="Mobile Number" type="tel" name="phone" />
                               <input placeholder="Email" type="email" name="email" />
-                              <Button
-                              type="submit"
-                              onClick={(event) => {
-                                event.preventDefault()
-                                handleBookLoan(book)
-                              }}>
+                              <Button type="submit">
                                 Loan Book
                               </Button>
                               </form>

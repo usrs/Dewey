@@ -45,6 +45,7 @@ router.delete('/bookshelf/:id', passport.authenticate('jwt'), (req, res) => {
 
 //  POST a book loan
 router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
+
   Book.findByIdAndUpdate(req.params.id, {
     name: req.body.name,
     phone: req.body.phone,
@@ -55,6 +56,8 @@ router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
     // $unset removes values from a document item
   })
     .then((book) => {
+      // check before push if it already exists
+
       User.findByIdAndUpdate(req.user._id, { $push: { books: book._id } })
         .then(() =>
           res.json({

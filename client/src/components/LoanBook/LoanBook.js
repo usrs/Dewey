@@ -39,12 +39,10 @@ const LoanBook = () => {
 
   const classes = useStyles()
 
-  const [loanBookState, setLoanBookState] = useState({
-    books: []
-  })
+  const [loanBookState, setLoanBookState] = useState([])
 
-  loanBookState.handleReturnSubmit = book => {
-
+  const handleReturnSubmit = book => {
+    // making axios request here
   }
   
   // to render user's book cards on load
@@ -54,10 +52,9 @@ const LoanBook = () => {
         'Authorization': `Bearer ${localStorage.getItem('id')}`
       }
     })
-      .then(() => {
-        const books = loanBookState.books
-        const loanBooksFiltered = books.filter(loans => loans.isLoaned === true)
-        setLoanBookState({ ...loanBookState, books: loanBooksFiltered })
+      .then(({ data }) => {
+        const loanBooksFiltered = data.books.filter(loans => loans.isLoaned === true)
+        setLoanBookState([ ...loanBooksFiltered ])
         // console.log(books)
       })
       .catch(err => console.error(err))
@@ -132,8 +129,8 @@ const LoanBook = () => {
           </Paper>
         </Container>
       </div>
-      {/* {
-        loanBookState.books.map(book => {
+      {
+        loanBookState.map(book => {
           console.log(book)
           return (
             <div key={book.bookId} className={classes.root}>
@@ -201,7 +198,7 @@ const LoanBook = () => {
             </div>
           )
         })
-      } */}
+      }
     </div>
   )
 
