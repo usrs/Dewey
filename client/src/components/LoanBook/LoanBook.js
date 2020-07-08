@@ -106,10 +106,13 @@ const LoanBook = () => {
                       Author: Charles Dickens
                     </Typography>
                     <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                      Published: 1800
+                      Loaned To: Erika
                     </Typography>
                     <Typography className={classes.typograph} variant="body2" color="textSecondary">
-                      Publisher: Chapman & Hall
+                      Email: erika@gmail.com
+                    </Typography>
+                    <Typography className={classes.typograph} variant="body2" color="textSecondary">
+                      Phone: (714) 486-9237
                     </Typography>
                   </Grid>
                   <Grid 
