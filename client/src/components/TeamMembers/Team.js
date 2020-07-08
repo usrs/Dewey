@@ -43,11 +43,10 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Nathan
                 <br />
-                <small className={classes.smallTitle}>Model</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
-                  Description for Nathan
+                  Graphic desiger turned web developer. I love a good puzzle, and thinking creativly to make the the world around me a better place. I'm a generalist that is always learning about something new, and applying what I have learned to whatever project I'm working on.
                 </p>
               </CardBody>
               {/*
@@ -73,7 +72,6 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Erika Paige
                 <br />
-                <small className={classes.smallTitle}>Designer</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
@@ -104,7 +102,6 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Michael
                 <br />
-                <small className={classes.smallTitle}>Model</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
@@ -138,7 +135,6 @@ export default function TeamSection() {
               <h4 className={classes.cardTitle}>
                 Jonathan
                 <br />
-                <small className={classes.smallTitle}>Designer</small>
               </h4>
               <CardBody>
                 <p className={classes.description}>
