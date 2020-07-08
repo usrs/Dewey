@@ -81,7 +81,7 @@ const LoanBook = () => {
                 <CardMedia>
                   <img
                     className={classes.image}
-                    src="./books_image_2.jpg"
+                    src="./books_library_card.jpg"
                     alt="book shelf" />
                 </CardMedia>
               </Grid>
