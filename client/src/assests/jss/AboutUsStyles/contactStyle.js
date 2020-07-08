@@ -11,7 +11,8 @@ const contactStyle = {
     minHeight: "32px",
     textDecoration: "none",
     textAlign: "center",
-    color: "White"
+    color: "White",
+    fontFamily: "Arial, Helvetica, sansSerif"
   },
   description: {
     color: "white",

@@ -12,7 +12,8 @@ const teamStyle = {
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none",
-    color: "white"
+    color: "white",
+    fontFamily: "Arial, Helvetica, sansSerif"
   },
   ...imagesStyle,
   itemGrid: {
