@@ -51,20 +51,35 @@ router.post('/bookshelf/loan/:id', passport.authenticate('jwt'), (req, res) => {
     phone: req.body.phone,
     email: req.body.email,
     isLoaned: true,
-    // add name, phone, email to book
-    // when it's no longer loaned, remove name, phone, email
-    // $unset removes values from a document item
   })
     .then((book) => {
-      // check before push if it already exists
+      res.json({
+        isbn: book._id,
+        isLoaned: book.isLoaned
+      })
+    })
+    .catch((err) => res.status(500).send(err))
+})
 
-      User.findByIdAndUpdate(req.user._id, { $push: { books: book._id } })
-        .then(() =>
-          res.json({
-            isLoaned: book.isLoaned,
-          })
-        )
-        .catch((err) => res.status(500).send(err))
+//  POST a book loan
+router.post('/bookshelf/returnBook/:id', passport.authenticate('jwt'), (req, res) => {
+
+  Book.findByIdAndUpdate(req.params.id, { $unset: {
+    name: "",
+    phone: "",
+    email: ""
+    }
+  })
+    .then(
+      Book.findByIdAndUpdate(req.params.id, {
+        isLoaned: false
+      })
+    )
+    .then((book) => {
+      res.json({
+        isbn: book._id,
+        isLoaned: book.isLoaned
+      })
     })
     .catch((err) => res.status(500).send(err))
 })

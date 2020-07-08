@@ -78,7 +78,8 @@ const BookShelf = () => {
       },
     })
       .then(() => {
-        const books = JSON.parse(JSON.stringify(bookShelfState.books))
+        console.log(book)
+        const books = JSON.parse(JSON.stringify(bookShelfState))
         const booksFiltered = books.filter(boock => boock._id !== book._id)
         // setBookShelfState({ ...bookShelfState, books: booksFiltered })
       })
@@ -113,9 +114,9 @@ const BookShelf = () => {
       .then(({ data }) => {
         data.books.forEach(book => {
           if(!book.isLoaned) {
-            const newBookShelfState = bookShelfState;
-            newBookShelfState.push(book);
-            setBookShelfState([...newBookShelfState ]);
+            const newBookShelfState = bookShelfState
+            newBookShelfState.push(book)
+            setBookShelfState([...newBookShelfState ])
           }
         });
       })
@@ -162,7 +163,8 @@ const BookShelf = () => {
           Authorization: `Bearer ${localStorage.getItem("id")}`,
         }
       },
-    ).then(() => window.location.reload()).catch(error => console.log(error))
+    ).then(() => window.location.reload())
+    .catch(error => console.log(error))
 
     /*
     axios.post(`/api/bookshelf/loan/${book._id}`, {
@@ -274,7 +276,7 @@ const BookShelf = () => {
                           <Button 
                           size="small" 
                           color="danger"
-                          onClick={() => bookShelfState.handleDeleteBook(book)}>
+                          onClick={handleDeleteBook(book)}>
                             Remove from Library
                           </Button>
                           <Button
