@@ -2,7 +2,7 @@
 This interactive library application allows a user to securely sign-in and add books that they have in their personal . query and display books based on their search parameters.
 <br>
 <br>
-dewey.works
+App: dewey.works
 
 ![](/filepath.png)
 <br>
