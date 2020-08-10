@@ -1,5 +1,8 @@
 # Dewey
 This interactive library application allows a user to securely sign-in and add books that they have in their personal . query and display books based on their search parameters.
+<br>
+<br>
+dewey.works
 
 ![](/filepath.png)
 <br>
@@ -56,5 +59,3 @@ The saved books can be viewed on the user's profile page, their digital bookshel
 <br>
 <br>
 <br>
-## App
-dewey.works
