@@ -34,7 +34,7 @@
     "express-validator": "^6.6.1",
     "history": "^5.0.0",
     "if-env": "^1.0.4",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.10.2",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
